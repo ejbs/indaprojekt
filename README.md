@@ -1,1 +1,1 @@
-This is our README.
+This is a small bullet hell game developed as the final project of InDa13 @ KTH.
