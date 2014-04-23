@@ -19,8 +19,6 @@ public class Phys implements KeyListener{
 	private ArrayList<ScreenEntity> entities;
 	//A map keeping track of which keys are pressed down.
 	private HashMap<String,Boolean> keys;
-	//The initial number of maximum bots in the game, this can increase over time.
-	private int maxBots = 1;
 
 	/**
 	 * The constructor to call in order to initiate the game.
@@ -40,7 +38,8 @@ public class Phys implements KeyListener{
 		int loopCounter = 0;
 		
 		while(true){
-			//This comparison might not be 100% accurate at high fps.
+                    //This comparison might not be 100% accurate at high fps.
+                    // Just use mod (%) to fix this?
 			if(loopCounter == (int)(1000/maxFPS)){
 				//updating the screen
 				drawScreen();
