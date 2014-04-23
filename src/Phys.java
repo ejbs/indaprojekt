@@ -48,8 +48,6 @@ public class Phys implements KeyListener{
 			loopCounter++;
 			//Doing all calculations regarding the entities on the screen.
 			calculatePhysics();
-			//Doing all calculations regarding the game rules and such.
-			calculateGame();
 			try{
 				//a short sleep to make the game smooth
 				Thread.sleep(1);
