@@ -92,17 +92,6 @@ public class Phys implements KeyListener{
 	}
 	
 	/**
-	 * This method keeps track of when to add and remove entities from the game.
-	 */
-	private void calculateGame(){
-		//might need to change when bullets are introduced as entities.
-		if(entities.size() <= maxBots){
-			//add another bot.
-		}
-		//also check whether any entity is outside of the screen.
-	}
-	
-	/**
 	 * Called in order to repaint the background and all entities on the screen.
 	 */
 	private void drawScreen(){
