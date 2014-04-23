@@ -1,7 +1,6 @@
 import java.awt.*;
 
 public interface ScreenEntity {
-	
 	double getX();
 	void setX(double d);
 	double getY();
@@ -13,7 +12,17 @@ public interface ScreenEntity {
 	int getWidth();
 	int getHeight();
 	Color getColor();
-	boolean isIntersectable();
-	int getType();
-	void draw(Graphics g);
+        /**
+         * Is the object collideable/solid?
+         **/
+        boolean isIntersectable();
+        int getType();
+        /**
+         * Called at each draw, lets the object draw to the canvas g.
+         **/
+        void draw(Graphics g);
+        /**
+         * Called for each game tick, used for book keeping and other things
+         **/
+        void tick();
 }
