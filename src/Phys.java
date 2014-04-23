@@ -168,7 +168,7 @@ public class Phys implements KeyListener{
 		keys.put("up", false);
 		keys.put("down", false);
 		keys.put("right", false);
-		keys.put("left", false);
+ 		keys.put("left", false);
 	}
 	
 	public static void main(String[] args) {
