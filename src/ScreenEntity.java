@@ -10,12 +10,10 @@ public interface ScreenEntity {
 	void setVelocityX(double d);
 	double getVelocityY();
 	void setVelocityY(double d);
-	double getEnginePower();
 	int getWidth();
 	int getHeight();
-	double getWeight();
 	Color getColor();
-	boolean getIntersectable();
+	boolean isIntersectable();
 	int getType();
 	void draw(Graphics g);
 }
