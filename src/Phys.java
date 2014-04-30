@@ -40,7 +40,7 @@ public class Phys implements KeyListener{
 		while(true){
                     //This comparison might not be 100% accurate at high fps.
                     // Just use mod (%) to fix this?
-			if(loopCounter == (int)(1000/maxFPS)){
+		        if(loopCounter == (int)(1000/maxFPS)){
 				//updating the screen
 				drawScreen();
 				loopCounter = 0;

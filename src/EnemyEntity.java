@@ -3,8 +3,8 @@ import java.awt.Graphics;
 
 
 public class EnemyEntity {
-	private final int TYPE = 1;
-	private Color color;
+        private final int TYPE = 1;
+        private Color color;
 	private boolean intersectable;
 	private double xPos;
 	private double yPos;
