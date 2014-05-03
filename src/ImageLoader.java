@@ -7,6 +7,7 @@ public class ImageLoader {
                         System.err.println("Error: Could not read image +"path);
                         System.exit(1);
                 }
+                return img;
         }
         
 }
