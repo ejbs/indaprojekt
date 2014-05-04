@@ -124,6 +124,7 @@ public class Game implements KeyListener{
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.addKeyListener(this);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		g = frame.getGraphics();
 		i = frame.createImage(WIDTH,HEIGHT);
 		bufferG = i.getGraphics();
