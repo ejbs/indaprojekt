@@ -35,19 +35,16 @@ public class Game implements KeyListener{
 	/**
 	 * The never ending loop sustaining the game's calculations and screen updates.
 	 */
+	 //TODO: remove bullets when they exit the screen
+	 //      maybe put the screen drawing in a new thread?
 	private void gameLoop() {
-		//determines the maximum fps of the game.
-		final int maxFPS = 100;
 		//a counter that helps with the fps determination.
 		int loopCounter = 0;
 		while (true){
-			score++;
-            //This comparison might not be 100% accurate at high fps.
-            // Just use mod (%) to fix this?
-		    if(loopCounter == (int)(1000/maxFPS)){
+		    if(loopCounter%10 == 0){
 				//updating the screen
 				drawScreen();
-				loopCounter = 0;
+				score++;
 			}
 			loopCounter++;
 			//Doing all calculations regarding the entities on the screen.
