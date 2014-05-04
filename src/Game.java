@@ -6,9 +6,13 @@ import java.awt.event.*;
 public class Game implements KeyListener{
 
 	//The height of the screen.
-	private final int HEIGHT = 720;
+	private final int HEIGHT = 900;
 	//The width of the screen.
-	private final int WIDTH = 1280;
+	private final int WIDTH = 1600;
+	//The current score.
+	private int score;
+	//The highest achieved score for the current game session.
+	private int highscore;
 	//the visual frame on which everything is displayed
 	private JFrame frame;
 	//Two graphics instances due to double buffering.
@@ -36,11 +40,11 @@ public class Game implements KeyListener{
 		final int maxFPS = 100;
 		//a counter that helps with the fps determination.
 		int loopCounter = 0;
-
-		while(true){
-                    //This comparison might not be 100% accurate at high fps.
-                    // Just use mod (%) to fix this?
-		        if(loopCounter == (int)(1000/maxFPS)){
+		while (true){
+			score++;
+            //This comparison might not be 100% accurate at high fps.
+            // Just use mod (%) to fix this?
+		    if(loopCounter == (int)(1000/maxFPS)){
 				//updating the screen
 				drawScreen();
 				loopCounter = 0;
@@ -77,6 +81,12 @@ public class Game implements KeyListener{
 		for(ScreenEntity e: entities){
 			e.draw(bufferG);
 		}
+		bufferG.setFont(new Font("Monospaced", Font.BOLD, 25));
+		bufferG.setColor(Color.YELLOW);
+		bufferG.drawString(Integer.toString(highscore),1485,50);
+		bufferG.drawString("HIGHSCORE:",1330,50);
+		bufferG.drawString(Integer.toString(score),1485,80);
+		bufferG.drawString("SCORE:",1390,80);
 		//Double buffering.
 		g.drawImage(i,0,0,null);
 	}
