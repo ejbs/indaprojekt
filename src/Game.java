@@ -4,18 +4,18 @@ import java.util.*;
 import java.awt.event.*;
 
 public class Game implements KeyListener{
-	
+
 	//The height of the screen.
-	private final int HEIGHT = 800;
+	private final int HEIGHT = 720;
 	//The width of the screen.
-	private final int WIDTH = 1000;
+	private final int WIDTH = 1280;
 	//the visual frame on which everything is displayed
 	private JFrame frame;
 	//Two graphics instances due to double buffering.
 	private Graphics g, bufferG;
 	//Image used for double buffering.
 	private Image i;
-	//A list of all entities in the game. 
+	//A list of all entities in the game.
 	private ArrayList<ScreenEntity> entities;
 	//A map keeping track of which keys are pressed down.
 	public static HashMap<String,Boolean> keys;
@@ -27,7 +27,7 @@ public class Game implements KeyListener{
 		initComponents();
 		gameLoop();
 	}
-	
+
 	/**
 	 * The never ending loop sustaining the game's calculations and screen updates.
 	 */
@@ -36,7 +36,7 @@ public class Game implements KeyListener{
 		final int maxFPS = 100;
 		//a counter that helps with the fps determination.
 		int loopCounter = 0;
-		
+
 		while(true){
                     //This comparison might not be 100% accurate at high fps.
                     // Just use mod (%) to fix this?
@@ -57,7 +57,7 @@ public class Game implements KeyListener{
 			}
 		}
 	}
-	
+
 	/**
 	 * Does all calculations regarding physics.
 	 */
@@ -67,7 +67,7 @@ public class Game implements KeyListener{
                         e.tick();
 		}
 	}
-	
+
 	/**
 	 * Called in order to repaint the background and all entities on the screen.
 	 */
@@ -80,7 +80,7 @@ public class Game implements KeyListener{
 		//Double buffering.
 		g.drawImage(i,0,0,null);
 	}
-	
+
 	/**
 	 * Called when a key has been pressed.
 	 * @param e The KeyEvent generated
@@ -93,7 +93,7 @@ public class Game implements KeyListener{
 			case 39: keys.put("right", true);break;
 		}
 	}
-	
+
 	/**
 	 * Called when a key has been typed.
 	 * @param e The KeyEvent generated
@@ -101,7 +101,7 @@ public class Game implements KeyListener{
 	public void keyTyped(KeyEvent e){
 		//This KeyEvent is ignored.
 	}
-	
+
 	/**
 	 * Called when a key has been released.
 	 * @param e The KeyEvent generated
@@ -114,7 +114,7 @@ public class Game implements KeyListener{
 			case 39: keys.put("right", false);break;
 		}
 	}
-	
+
 	/**
 	 * initializes all values in order to make the game work.
 	 */
@@ -127,16 +127,16 @@ public class Game implements KeyListener{
 		g = frame.getGraphics();
 		i = frame.createImage(WIDTH,HEIGHT);
 		bufferG = i.getGraphics();
-		
+
 		entities = new ArrayList<ScreenEntity>();
-		entities.add(new PlayerEntity(50,50,50,50,Color.RED));
+		entities.add(new PlayerEntity(300,300,25,25,Color.RED));
 		keys = new HashMap<String,Boolean>();
 		keys.put("up", false);
 		keys.put("down", false);
 		keys.put("right", false);
  		keys.put("left", false);
 	}
-	
+
 	public static void main(String[] args) {
 		new Game();
 	}
