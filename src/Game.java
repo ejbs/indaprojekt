@@ -53,7 +53,7 @@ public class Game implements KeyListener{
 			//Doing all calculations regarding the entities on the screen.
 			calculatePhysics();
 			try{
-				//a short sleep to make the game smooth
+				//a short sleep to make the game smoother
 				Thread.sleep(1);
 			}
 			catch(Exception e){
@@ -68,7 +68,7 @@ public class Game implements KeyListener{
 	private void calculatePhysics(){
 		//This loop makes the entities move according to their current speed.
 		for(ScreenEntity e : entities){
-                        e.tick();
+        	e.tick();
 		}
 	}
 
@@ -90,6 +90,14 @@ public class Game implements KeyListener{
 		//Double buffering.
 		g.drawImage(i,0,0,null);
 	}
+
+	/**
+	 * Spawns a new bullet with random values and adds it to entities.
+	 */
+	 private void spawnBullet(){
+		 //Needs improvement to spawn in a better way.
+		 entities.add( new EnemyEntity(30,30,15,15,Color.GREEN,0.002,0.1,0.1) );
+	 }
 
 	/**
 	 * Called when a key has been pressed.
@@ -140,7 +148,8 @@ public class Game implements KeyListener{
 		bufferG = i.getGraphics();
 
 		entities = new ArrayList<ScreenEntity>();
-		entities.add(new PlayerEntity(300,300,25,25,Color.RED));
+		entities.add( new PlayerEntity(300,300,25,25,Color.RED) );
+		spawnBullet();
 		keys = new HashMap<String,Boolean>();
 		keys.put("up", false);
 		keys.put("down", false);

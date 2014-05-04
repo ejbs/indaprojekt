@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 
-public class EnemyEntity {
+public class EnemyEntity implements ScreenEntity{
     private final int TYPE = 1;
     private Color color;
 	private boolean intersectable;
@@ -14,15 +14,16 @@ public class EnemyEntity {
 	private int width;
 	private int height;
 
-	public EnemyEntity(double x, double y, int width, int height, Color c, double enginePower) {
+	public EnemyEntity(double x, double y, int width, int height, Color c, double enginePower, double xVel, double yVel) {
 		this.xPos = x;
 		this.yPos = y;
 		this.width = width;
 		this.height = height;
 		this.color = c;
 		this.intersectable = true;
-		//just a starting value
 		this.enginePower = enginePower;
+		this.xVel = xVel;
+		this.yVel = yVel;
 	}
 
 	public double getX(){
@@ -69,15 +70,11 @@ public class EnemyEntity {
 		return height;
 	}
 
-	public double getWeight(){
-		return width*height;
-	}
-
 	public Color getColor(){
 		return color;
 	}
 
-	public boolean getIntersectable(){
+	public boolean isIntersectable(){
 		return intersectable;
 	}
 
@@ -88,5 +85,10 @@ public class EnemyEntity {
 	public void draw(Graphics g){
 		g.setColor(getColor());
 		g.fillRect( (int)getX(), (int)getY(), getWidth(), getHeight() );
+	}
+
+	public void tick() {
+		this.xPos += this.xVel;
+		this.yPos += this.yVel;
 	}
 }

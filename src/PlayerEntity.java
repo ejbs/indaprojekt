@@ -75,7 +75,7 @@ public class PlayerEntity implements ScreenEntity {
 		return color;
 	}
 
-	public boolean getIntersectable(){
+	public boolean isIntersectable(){
 		return intersectable;
 	}
 
@@ -103,9 +103,5 @@ public class PlayerEntity implements ScreenEntity {
 		}
 		this.xPos += this.xVel;
 		this.yPos += this.yVel;
-	}
-
-	public boolean isIntersectable() {
-		return true;
 	}
 }
