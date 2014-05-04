@@ -17,6 +17,7 @@ public class Game implements KeyListener{
 	private Image i;
 	//A list of all entities in the game. 
 	private ArrayList<ScreenEntity> entities;
+        private PlayerEntity player;
 	//A map keeping track of which keys are pressed down.
 	public static HashMap<String,Boolean> keys;
 
@@ -70,6 +71,8 @@ public class Game implements KeyListener{
 		if(entities.size()>1){
 			//Nothing happens here yet.
 		}
+                player.tick();
+                
 	}
 	
 	/**
@@ -81,6 +84,7 @@ public class Game implements KeyListener{
 		for(ScreenEntity e: entities){
 			e.draw(bufferG);
 		}
+                player.draw(bufferG);
 		//Double buffering.
 		g.drawImage(i,0,0,null);
 	}
@@ -133,7 +137,7 @@ public class Game implements KeyListener{
 		bufferG = i.getGraphics();
 		
 		entities = new ArrayList<ScreenEntity>();
-		entities.add(new PlayerEntity(50,50,50,50,Color.RED));
+		player =  new PlayerEntity(50,50,50,50,Color.RED);
 		keys = new HashMap<String,Boolean>();
 		keys.put("up", false);
 		keys.put("down", false);
