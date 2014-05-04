@@ -89,6 +89,7 @@ public class PlayerEntity implements ScreenEntity {
 		g.fillRect( (int)getX(), (int)getY(), getWidth(), getHeight() );
 	}
         public void tick() {
+                System.out.println("In here");
                 if(Game.keys.get("up")){
 			this.setVelocityY(this.getVelocityY()-this.getEnginePower());
 		}
