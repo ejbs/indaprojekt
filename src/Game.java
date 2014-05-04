@@ -64,28 +64,11 @@ public class Game implements KeyListener{
 	private void calculatePhysics(){
 		//This loop makes the entities move according to their current speed.
 		for(ScreenEntity e : entities){
-			//WARNING NO COLLISION CHECK IMPLEMENTED YET.
-			e.setX(e.getX()+e.getVelocityX());
-			e.setY(e.getY()+e.getVelocityY());
+                        e.tick();
 		}
 		//This loop determine how the bots' speed changes.
 		if(entities.size()>1){
 			//Nothing happens here yet.
-		}
-		//A copy of the players entity which is always at index 0.
-		PlayerEntity tmp = (PlayerEntity) entities.get(0);
-		//These lines determine how the player's speed changes.
-		if(keys.get("up")){
-			tmp.setVelocityY(tmp.getVelocityY()-tmp.getEnginePower());
-		}
-		if(keys.get("down")){
-			tmp.setVelocityY(tmp.getVelocityY()+tmp.getEnginePower());
-		}
-		if(keys.get("left")){
-			tmp.setVelocityX(tmp.getVelocityX()-tmp.getEnginePower());
-		}
-		if(keys.get("right")){
-			tmp.setVelocityX(tmp.getVelocityX()+tmp.getEnginePower());
 		}
 	}
 	
