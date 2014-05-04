@@ -88,4 +88,22 @@ public class PlayerEntity implements ScreenEntity {
 		g.setColor(getColor());
 		g.fillRect( (int)getX(), (int)getY(), getWidth(), getHeight() );
 	}
+        public void tick() {
+                System.out.println("In here");
+                if(Game.keys.get("up")){
+			this.setVelocityY(this.getVelocityY()-this.getEnginePower());
+		}
+		if(Game.keys.get("down")){
+			this.setVelocityY(this.getVelocityY()+this.getEnginePower());
+		}
+		if(Game.keys.get("left")){
+			this.setVelocityX(this.getVelocityX()-this.getEnginePower());
+		}
+		if(Game.keys.get("right")){
+			this.setVelocityX(this.getVelocityX()+this.getEnginePower());
+		}
+        }
+        public boolean isIntersectable() {
+                return true;
+        }
 }

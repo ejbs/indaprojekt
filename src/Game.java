@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.*;
 import java.awt.event.*;
 
-public class Phys implements KeyListener{
+public class Game implements KeyListener{
 	
 	//The height of the screen.
 	private final int HEIGHT = 800;
@@ -17,13 +17,14 @@ public class Phys implements KeyListener{
 	private Image i;
 	//A list of all entities in the game. 
 	private ArrayList<ScreenEntity> entities;
+        private PlayerEntity player;
 	//A map keeping track of which keys are pressed down.
-	private HashMap<String,Boolean> keys;
+	public static HashMap<String,Boolean> keys;
 
 	/**
 	 * The constructor to call in order to initiate the game.
 	 */
-	public Phys() {
+	public Game() {
 		initComponents();
 		gameLoop();
 	}
@@ -64,29 +65,14 @@ public class Phys implements KeyListener{
 	private void calculatePhysics(){
 		//This loop makes the entities move according to their current speed.
 		for(ScreenEntity e : entities){
-			//WARNING NO COLLISION CHECK IMPLEMENTED YET.
-			e.setX(e.getX()+e.getVelocityX());
-			e.setY(e.getY()+e.getVelocityY());
+                        e.tick();
 		}
 		//This loop determine how the bots' speed changes.
 		if(entities.size()>1){
 			//Nothing happens here yet.
 		}
-		//A copy of the players entity which is always at index 0.
-		PlayerEntity tmp = (PlayerEntity) entities.get(0);
-		//These lines determine how the player's speed changes.
-		if(keys.get("up")){
-			tmp.setVelocityY(tmp.getVelocityY()-tmp.getEnginePower());
-		}
-		if(keys.get("down")){
-			tmp.setVelocityY(tmp.getVelocityY()+tmp.getEnginePower());
-		}
-		if(keys.get("left")){
-			tmp.setVelocityX(tmp.getVelocityX()-tmp.getEnginePower());
-		}
-		if(keys.get("right")){
-			tmp.setVelocityX(tmp.getVelocityX()+tmp.getEnginePower());
-		}
+                player.tick();
+                
 	}
 	
 	/**
@@ -98,6 +84,7 @@ public class Phys implements KeyListener{
 		for(ScreenEntity e: entities){
 			e.draw(bufferG);
 		}
+                player.draw(bufferG);
 		//Double buffering.
 		g.drawImage(i,0,0,null);
 	}
@@ -150,7 +137,7 @@ public class Phys implements KeyListener{
 		bufferG = i.getGraphics();
 		
 		entities = new ArrayList<ScreenEntity>();
-		entities.add(new PlayerEntity(50,50,50,50,Color.RED));
+		player =  new PlayerEntity(50,50,50,50,Color.RED);
 		keys = new HashMap<String,Boolean>();
 		keys.put("up", false);
 		keys.put("down", false);
@@ -159,6 +146,6 @@ public class Phys implements KeyListener{
 	}
 	
 	public static void main(String[] args) {
-		new Phys();
+		new Game();
 	}
 }
