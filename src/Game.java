@@ -50,7 +50,7 @@ public class Game implements KeyListener{
 			//Doing all calculations regarding the entities on the screen.
 			calculatePhysics();
 			try{
-				//a short sleep to make the game smoother
+				//a short sleep to make the game smoother.
 				Thread.sleep(1);
 			}
 			catch(Exception e){
