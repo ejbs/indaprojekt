@@ -6,15 +6,25 @@ import java.awt.event.*;
 public class Game implements KeyListener{
 
 	//The height of the screen.
-	private final int HEIGHT = 720;
+	private final int HEIGHT = 900;
 	//The width of the screen.
-	private final int WIDTH = 1280;
-	//the visual frame on which everything is displayed
+	private final int WIDTH = 1600;
+	//The current score.
+	private int score;
+	//The highest achieved score for the current game session.
+	private int highscore;
+	//Increases difficulty value is lowered
+	private int difficulty;
+	//Keeps track of whether the player has lost or not.
+	private boolean gameOver;
+	//the visual frame on which everything is displayed.
 	private JFrame frame;
 	//Two graphics instances due to double buffering.
 	private Graphics g, bufferG;
 	//Image used for double buffering.
 	private Image i;
+	//An instance of CollisionHandler to keep track of collisions.
+	private CollisionHandler collisions;
 	//A list of all entities in the game.
 	private ArrayList<ScreenEntity> entities;
 	//A map keeping track of which keys are pressed down.
@@ -26,30 +36,35 @@ public class Game implements KeyListener{
 	public Game() {
 		initComponents();
 		gameLoop();
+		gameOver();
 	}
 
 	/**
 	 * The never ending loop sustaining the game's calculations and screen updates.
 	 */
+	 //TODO: remove bullets when they exit the screen
+	 //      maybe put the screen drawing in a new thread?
 	private void gameLoop() {
-		//determines the maximum fps of the game.
-		final int maxFPS = 100;
-		//a counter that helps with the fps determination.
+		//a counter that helps with the fps determination and bullet spawning.
 		int loopCounter = 0;
 
-		while(true){
-                    //This comparison might not be 100% accurate at high fps.
-                    // Just use mod (%) to fix this?
-		        if(loopCounter == (int)(1000/maxFPS)){
-				//updating the screen
+		while (!gameOver){
+		    if(loopCounter%10 == 0){
 				drawScreen();
-				loopCounter = 0;
+				score++;
+				if(loopCounter%difficulty == 0){
+					spawnBullet();
+				}
+				if(score%1000 == 0 && difficulty > 10){
+					difficulty = difficulty-10;
+				}
 			}
 			loopCounter++;
+
 			//Doing all calculations regarding the entities on the screen.
 			calculatePhysics();
 			try{
-				//a short sleep to make the game smooth
+				//a short sleep to make the game smoother.
 				Thread.sleep(1);
 			}
 			catch(Exception e){
@@ -64,7 +79,18 @@ public class Game implements KeyListener{
 	private void calculatePhysics(){
 		//This loop makes the entities move according to their current speed.
 		for(ScreenEntity e : entities){
-                        e.tick();
+        	e.tick();
+		}
+		for(int i = 1; i < entities.size(); i++){
+			if(collisions.hasCollided(entities.get(0),entities.get(i))){
+				gameOver = true;
+			}
+			if(!collisions.insideBounds(entities.get(i),WIDTH,HEIGHT)){
+				entities.remove(i);
+			}
+		}
+		if(!collisions.insideBounds(entities.get(0),WIDTH,HEIGHT)){
+			gameOver = true;
 		}
 	}
 
@@ -77,9 +103,38 @@ public class Game implements KeyListener{
 		for(ScreenEntity e: entities){
 			e.draw(bufferG);
 		}
+		bufferG.setFont(new Font("Monospaced", Font.BOLD, 25));
+		bufferG.setColor(Color.YELLOW);
+		bufferG.drawString(Integer.toString(highscore),1485,50);
+		bufferG.drawString("HIGHSCORE:",1330,50);
+		bufferG.drawString(Integer.toString(score),1485,80);
+		bufferG.drawString("SCORE:",1390,80);
 		//Double buffering.
 		g.drawImage(i,0,0,null);
 	}
+
+	/**
+	 * Spawns a new bullet with random values and adds it to entities.
+	 */
+	 private void spawnBullet(){
+		 //entities.add( new EnemyEntity(30,30,15,15,Color.GREEN,0.002,0.1,0.1) );
+		if(Math.random() > 0.5) {
+			if(Math.random() > 0.5){
+				entities.add( new EnemyEntity(0, Math.random()*HEIGHT, 15, 15, Color.GREEN, 0.002, 0.1, 0) );
+			}
+			else {
+				entities.add( new EnemyEntity(WIDTH, Math.random()*HEIGHT, 15, 15, Color.GREEN, 0.002, -0.1, 0) );
+			}
+		}
+		else {
+			if(Math.random() > 0.5){
+				entities.add( new EnemyEntity(Math.random()*WIDTH, 0, 15, 15, Color.GREEN, 0.002, 0, 0.1) );
+			}
+			else {
+				entities.add( new EnemyEntity(Math.random()*WIDTH, HEIGHT, 15, 15, Color.GREEN, 0.002, 0, -0.1) );
+			}
+		}
+	 }
 
 	/**
 	 * Called when a key has been pressed.
@@ -113,6 +168,14 @@ public class Game implements KeyListener{
 			case 37: keys.put("left", false);break;
 			case 39: keys.put("right", false);break;
 		}
+
+	}
+
+	private void gameOver(){
+		bufferG.setFont(new Font("Monospaced", Font.BOLD, 110));
+		bufferG.setColor(Color.YELLOW);
+		bufferG.drawString("GAME OVER",500,400);
+		g.drawImage(i,0,0,null);
 	}
 
 	/**
@@ -128,14 +191,17 @@ public class Game implements KeyListener{
 		g = frame.getGraphics();
 		i = frame.createImage(WIDTH,HEIGHT);
 		bufferG = i.getGraphics();
+		collisions = new CollisionHandler();
 
 		entities = new ArrayList<ScreenEntity>();
-		entities.add(new PlayerEntity(300,300,25,25,Color.RED));
+		entities.add( new PlayerEntity(300,300,25,25,Color.RED) );
 		keys = new HashMap<String,Boolean>();
 		keys.put("up", false);
 		keys.put("down", false);
 		keys.put("right", false);
  		keys.put("left", false);
+ 		gameOver = false;
+ 		difficulty = 50;
 	}
 
 	public static void main(String[] args) {
