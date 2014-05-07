@@ -13,6 +13,8 @@ public class Game implements KeyListener{
 	private int score;
 	//The highest achieved score for the current game session.
 	private int highscore;
+	//Increases difficulty value is lowered
+	private int difficulty;
 	//Keeps track of whether the player has lost or not.
 	private boolean gameOver;
 	//the visual frame on which everything is displayed.
@@ -43,15 +45,22 @@ public class Game implements KeyListener{
 	 //TODO: remove bullets when they exit the screen
 	 //      maybe put the screen drawing in a new thread?
 	private void gameLoop() {
-		//a counter that helps with the fps determination.
+		//a counter that helps with the fps determination and bullet spawning.
 		int loopCounter = 0;
+
 		while (!gameOver){
 		    if(loopCounter%10 == 0){
-				//updating the screen
 				drawScreen();
 				score++;
+				if(loopCounter%difficulty == 0){
+					spawnBullet();
+				}
+				if(score%1000 == 0 && difficulty > 10){
+					difficulty = difficulty-10;
+				}
 			}
 			loopCounter++;
+
 			//Doing all calculations regarding the entities on the screen.
 			calculatePhysics();
 			try{
@@ -76,6 +85,12 @@ public class Game implements KeyListener{
 			if(collisions.hasCollided(entities.get(0),entities.get(i))){
 				gameOver = true;
 			}
+			if(!collisions.insideBounds(entities.get(i),WIDTH,HEIGHT)){
+				entities.remove(i);
+			}
+		}
+		if(!collisions.insideBounds(entities.get(0),WIDTH,HEIGHT)){
+			gameOver = true;
 		}
 	}
 
@@ -102,8 +117,23 @@ public class Game implements KeyListener{
 	 * Spawns a new bullet with random values and adds it to entities.
 	 */
 	 private void spawnBullet(){
-		 //Needs improvement to spawn in a better way.
-		 entities.add( new EnemyEntity(30,30,15,15,Color.GREEN,0.002,0.1,0.1) );
+		 //entities.add( new EnemyEntity(30,30,15,15,Color.GREEN,0.002,0.1,0.1) );
+		if(Math.random() > 0.5) {
+			if(Math.random() > 0.5){
+				entities.add( new EnemyEntity(0, Math.random()*HEIGHT, 15, 15, Color.GREEN, 0.002, 0.1, 0) );
+			}
+			else {
+				entities.add( new EnemyEntity(WIDTH, Math.random()*HEIGHT, 15, 15, Color.GREEN, 0.002, -0.1, 0) );
+			}
+		}
+		else {
+			if(Math.random() > 0.5){
+				entities.add( new EnemyEntity(Math.random()*WIDTH, 0, 15, 15, Color.GREEN, 0.002, 0, 0.1) );
+			}
+			else {
+				entities.add( new EnemyEntity(Math.random()*WIDTH, HEIGHT, 15, 15, Color.GREEN, 0.002, 0, -0.1) );
+			}
+		}
 	 }
 
 	/**
@@ -138,6 +168,7 @@ public class Game implements KeyListener{
 			case 37: keys.put("left", false);break;
 			case 39: keys.put("right", false);break;
 		}
+
 	}
 
 	private void gameOver(){
@@ -164,13 +195,13 @@ public class Game implements KeyListener{
 
 		entities = new ArrayList<ScreenEntity>();
 		entities.add( new PlayerEntity(300,300,25,25,Color.RED) );
-		spawnBullet();
 		keys = new HashMap<String,Boolean>();
 		keys.put("up", false);
 		keys.put("down", false);
 		keys.put("right", false);
  		keys.put("left", false);
  		gameOver = false;
+ 		difficulty = 50;
 	}
 
 	public static void main(String[] args) {
