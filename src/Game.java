@@ -13,7 +13,9 @@ public class Game implements KeyListener{
 	private int score;
 	//The highest achieved score for the current game session.
 	private int highscore;
-	//the visual frame on which everything is displayed
+	//Keeps track of whether the player has lost or not.
+	private boolean gameOver;
+	//the visual frame on which everything is displayed.
 	private JFrame frame;
 	//Two graphics instances due to double buffering.
 	private Graphics g, bufferG;
@@ -32,6 +34,7 @@ public class Game implements KeyListener{
 	public Game() {
 		initComponents();
 		gameLoop();
+		gameOver();
 	}
 
 	/**
@@ -42,7 +45,7 @@ public class Game implements KeyListener{
 	private void gameLoop() {
 		//a counter that helps with the fps determination.
 		int loopCounter = 0;
-		while (true){
+		while (!gameOver){
 		    if(loopCounter%10 == 0){
 				//updating the screen
 				drawScreen();
@@ -70,7 +73,9 @@ public class Game implements KeyListener{
         	e.tick();
 		}
 		for(int i = 1; i < entities.size(); i++){
-			System.out.println(collisions.hasCollided(entities.get(0),entities.get(i)));
+			if(collisions.hasCollided(entities.get(0),entities.get(i))){
+				gameOver = true;
+			}
 		}
 	}
 
@@ -135,6 +140,13 @@ public class Game implements KeyListener{
 		}
 	}
 
+	private void gameOver(){
+		bufferG.setFont(new Font("Monospaced", Font.BOLD, 110));
+		bufferG.setColor(Color.YELLOW);
+		bufferG.drawString("GAME OVER",500,400);
+		g.drawImage(i,0,0,null);
+	}
+
 	/**
 	 * initializes all values in order to make the game work.
 	 */
@@ -158,6 +170,7 @@ public class Game implements KeyListener{
 		keys.put("down", false);
 		keys.put("right", false);
  		keys.put("left", false);
+ 		gameOver = false;
 	}
 
 	public static void main(String[] args) {

@@ -6,7 +6,9 @@ public class CollisionHandler {
 
 	public boolean hasCollided(ScreenEntity a, ScreenEntity b){
 		if(a.getX() + (a.getWidth()/2) > b.getX() && a.getX() - (a.getWidth()/2) < b.getX()){
-			return true;
+			if(a.getY() + (a.getHeight()/2) > b.getY() && a.getY() - (a.getHeight()/2) < b.getY()){
+				return true;
+			}
 		}
 		return false;
 	}
