@@ -19,6 +19,8 @@ public class Game implements KeyListener{
 	private Graphics g, bufferG;
 	//Image used for double buffering.
 	private Image i;
+	//An instance of CollisionHandler to keep track of collisions.
+	private CollisionHandler collisions;
 	//A list of all entities in the game.
 	private ArrayList<ScreenEntity> entities;
 	//A map keeping track of which keys are pressed down.
@@ -66,6 +68,9 @@ public class Game implements KeyListener{
 		//This loop makes the entities move according to their current speed.
 		for(ScreenEntity e : entities){
         	e.tick();
+		}
+		for(int i = 1; i < entities.size(); i++){
+			System.out.println(collisions.hasCollided(entities.get(0),entities.get(i)));
 		}
 	}
 
@@ -143,6 +148,7 @@ public class Game implements KeyListener{
 		g = frame.getGraphics();
 		i = frame.createImage(WIDTH,HEIGHT);
 		bufferG = i.getGraphics();
+		collisions = new CollisionHandler();
 
 		entities = new ArrayList<ScreenEntity>();
 		entities.add( new PlayerEntity(300,300,25,25,Color.RED) );
