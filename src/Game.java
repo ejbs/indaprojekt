@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.awt.event.*;
+import java.io.PrintWriter;
 
 public class Game implements KeyListener{
 
@@ -162,7 +163,23 @@ public class Game implements KeyListener{
 		bufferG.setColor(Color.YELLOW);
 		bufferG.drawString("GAME OVER",500,400);
 		g.drawImage(i,0,0,null);
-	}
+                if(score > highscore) {
+                        saveHighscore();
+                }
+        }
+
+        private void saveHighscore() {
+                // The following overwrites the file if present, so we don't have to bother about any pre-existing files.
+                PrintWriter pw = null;
+                try {
+                        pw = new PrintWriter("highscore.txt", "UTF-8");
+                        pw.println(highscore);
+                        pw.close();
+                } catch(Exception e) {
+                        System.err.println("Something faulty happened while writing to the highscores.txt file");
+                        System.exit(1);
+                }
+        }
 
 	/**
 	 * initializes all values in order to make the game work.
