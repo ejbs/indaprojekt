@@ -30,6 +30,8 @@ public class Game implements KeyListener{
 	private CollisionHandler collisions;
 	//A list of all entities in the game.
 	private ArrayList<ScreenEntity> entities;
+	//A spawner object that deals with the spawning of new bullets.
+	private SimpleSpawner spawner;
 	//A map keeping track of which keys are pressed down.
 	public static HashMap<String,Boolean> keys;
 
@@ -58,7 +60,7 @@ public class Game implements KeyListener{
 				if(loopCounter%difficulty == 0){
 					spawnBullet();
 				}
-				if(score%1000 == 0 && difficulty > 10){
+				if(score%500 == 0 && difficulty > 10){
 					difficulty = difficulty-10;
 				}
 			}
@@ -112,17 +114,33 @@ public class Game implements KeyListener{
 		bufferG.drawString("HIGHSCORE:",1330,50);
 		bufferG.drawString(Integer.toString(score),1485,80);
 		bufferG.drawString("SCORE:",1390,80);
+		bufferG.drawString("DIFFICULTY:",10,50);
+		bufferG.drawString(getDifficulty(),175,50);
 		//Double buffering.
 		g.drawImage(i,0,0,null);
+	}
+
+	/**
+	 * Returns a String representation of the current difficulty.
+	 *
+	 * @return a String representation of the current difficulty.
+	 */
+	private String getDifficulty(){
+		switch(difficulty){
+			case 50: return "NORMAL";
+			case 40: return "HARD";
+			case 30: return "VERY HARD";
+			case 20: return "NIGHTMARE";
+			case 10: return "DEATH WISH";
+			default: return "WALK IN THE PARK";
+		}
 	}
 
 	/**
 	 * Spawns a new bullet with random values and adds it to entities.
 	 */
     private void spawnBullet(){
-    	SimpleSpawner ss = new SimpleSpawner(WIDTH, HEIGHT);
-        //entities.add( new EnemyEntity(30,30,15,15,Color.GREEN,0.002,0.1,0.1) );
-        entities.add(ss.spawnBullet());
+        entities.add(spawner.spawnBullet());
 	}
 
 	/**
@@ -171,31 +189,31 @@ public class Game implements KeyListener{
 			}
         }
 
-        private void saveHighscore() {
-			// The following overwrites the file if present, so we don't have to bother about any pre-existing files.
-			PrintWriter pw = null;
-			try {
-				pw = new PrintWriter(HIGHSCORE_PATH, "UTF-8");
-				pw.println(highscore);
-				pw.close();
-			} catch(Exception e) {
-				System.err.println("Something faulty happened while writing to the highscore file");
-				System.exit(1);
+	private void saveHighscore() {
+		// The following overwrites the file if present, so we don't have to bother about any pre-existing files.
+		PrintWriter pw = null;
+		try {
+			pw = new PrintWriter(HIGHSCORE_PATH, "UTF-8");
+			pw.println(highscore);
+			pw.close();
+		} catch(Exception e) {
+			System.err.println("Something faulty happened while writing to the highscore file");
+			System.exit(1);
+		}
+	}
+	private void readHighscore() {
+		BufferedReader f = null;
+		try {
+			f = new BufferedReader(new InputStreamReader(new FileInputStream(HIGHSCORE_PATH), "UTF-8"));
+			String l;
+			while((l = f.readLine()) != null) {
+				highscore = Integer.parseInt(l);
 			}
-        }
-        private void readHighscore() {
-			BufferedReader f = null;
-			try {
-				f = new BufferedReader(new InputStreamReader(new FileInputStream(HIGHSCORE_PATH), "UTF-8"));
-				String l;
-				while((l = f.readLine()) != null) {
-					highscore = Integer.parseInt(l);
-				}
-			} catch(Exception e) {
-				System.err.println("Something faulty happened while reading the highscore file");
-				System.exit(1);
-			}
-        }
+		} catch(Exception e) {
+			System.err.println("Something faulty happened while reading the highscore file");
+			System.exit(1);
+		}
+	}
 
 	/**
 	 * initializes all values in order to make the game work.
@@ -213,14 +231,15 @@ public class Game implements KeyListener{
 		collisions = new CollisionHandler();
 
 		entities = new ArrayList<ScreenEntity>();
-		entities.add( new PlayerEntity(300,300,25,25,Color.RED) );
+		entities.add( new PlayerEntity(300,300,20,20,Color.RED) );
+		spawner = new SimpleSpawner(WIDTH,HEIGHT);
 		keys = new HashMap<String,Boolean>();
 		keys.put("up", false);
 		keys.put("down", false);
 		keys.put("right", false);
  		keys.put("left", false);
  		gameOver = false;
- 		difficulty = 50;
+ 		difficulty = 60;
         readHighscore();
 	}
 
