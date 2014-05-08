@@ -7,11 +7,11 @@ import java.io.*;
 public class Game implements KeyListener{
 
 	//The height of the screen.
-	private final int HEIGHT = 900;
+	private final int HEIGHT = 720;
 	//The width of the screen.
-	private final int WIDTH = 1600;
+	private final int WIDTH = 1280;
 	//The path to the highscore-saving file.
-    private final String HIGHSCORE_PATH = "highscore.txt";
+        private final String HIGHSCORE_PATH = "highscore.txt";
 	//The current score.
 	private int score;
 	//The highest achieved score for the current game session.
@@ -31,7 +31,7 @@ public class Game implements KeyListener{
 	//A list of all entities in the game.
 	private ArrayList<ScreenEntity> entities;
 	//A spawner object that deals with the spawning of new bullets.
-	private SimpleSpawner spawner;
+	private BulletSpawner spawner;
 	//A map keeping track of which keys are pressed down.
 	public static HashMap<String,Boolean> keys;
 
@@ -47,14 +47,14 @@ public class Game implements KeyListener{
 	/**
 	 * The never ending loop sustaining the game's calculations and screen updates.
 	 */
-	 //TODO: remove bullets when they exit the screen
-	 //      maybe put the screen drawing in a new thread?
+        //TODO: remove bullets when they exit the screen
+        //      maybe put the screen drawing in a new thread?
 	private void gameLoop() {
 		//a counter that helps with the fps determination and bullet spawning.
 		int loopCounter = 0;
 
 		while (!gameOver){
-		    if(loopCounter%10 == 0){
+                        if(loopCounter%10 == 0){
 				drawScreen();
 				score++;
 				if(loopCounter%difficulty == 0){
@@ -84,7 +84,7 @@ public class Game implements KeyListener{
 	private void calculatePhysics(){
 		//This loop makes the entities move according to their current speed.
 		for(ScreenEntity e : entities){
-        	e.tick();
+                        e.tick();
 		}
 		for(int i = 1; i < entities.size(); i++){
 			if(collisions.hasCollided(entities.get(0),entities.get(i))){
@@ -127,20 +127,20 @@ public class Game implements KeyListener{
 	 */
 	private String getDifficulty(){
 		switch(difficulty){
-			case 50: return "NORMAL";
-			case 40: return "HARD";
-			case 30: return "VERY HARD";
-			case 20: return "NIGHTMARE";
-			case 10: return "DEATH WISH";
-			default: return "WALK IN THE PARK";
+                case 50: return "NORMAL";
+                case 40: return "HARD";
+                case 30: return "VERY HARD";
+                case 20: return "NIGHTMARE";
+                case 10: return "DEATH WISH";
+                default: return "WALK IN THE PARK";
 		}
 	}
 
 	/**
 	 * Spawns a new bullet with random values and adds it to entities.
 	 */
-    private void spawnBullet(){
-        entities.add(spawner.spawnBullet());
+        private void spawnBullet(){
+                entities.add(spawner.spawnBullet());
 	}
 
 	/**
@@ -149,10 +149,10 @@ public class Game implements KeyListener{
 	 */
 	public void keyPressed(KeyEvent e){
 		switch(e.getKeyCode()){
-			case 38: keys.put("up", true);break;
-			case 40: keys.put("down", true);break;
-			case 37: keys.put("left", true);break;
-			case 39: keys.put("right", true);break;
+                case 38: keys.put("up", true);break;
+                case 40: keys.put("down", true);break;
+                case 37: keys.put("left", true);break;
+                case 39: keys.put("right", true);break;
 		}
 	}
 
@@ -170,10 +170,10 @@ public class Game implements KeyListener{
 	 */
 	public void keyReleased(KeyEvent e){
 		switch(e.getKeyCode()){
-			case 38: keys.put("up", false);break;
-			case 40: keys.put("down", false);break;
-			case 37: keys.put("left", false);break;
-			case 39: keys.put("right", false);break;
+                case 38: keys.put("up", false);break;
+                case 40: keys.put("down", false);break;
+                case 37: keys.put("left", false);break;
+                case 39: keys.put("right", false);break;
 		}
 
 	}
@@ -181,12 +181,12 @@ public class Game implements KeyListener{
 	private void gameOver(){
 		bufferG.setFont(new Font("Monospaced", Font.BOLD, 110));
 		bufferG.setColor(Color.YELLOW);
-		bufferG.drawString("GAME OVER",500,400);
+		bufferG.drawString("GAME OVER",WIDTH/4,HEIGHT/2);
 		g.drawImage(i,0,0,null);
-			if(score > highscore) {
-				highscore = score;
-				saveHighscore();
-			}
+                if(score > highscore) {
+                        highscore = score;
+                        saveHighscore();
+                }
         }
 
 	private void saveHighscore() {
@@ -240,7 +240,7 @@ public class Game implements KeyListener{
  		keys.put("left", false);
  		gameOver = false;
  		difficulty = 60;
-        readHighscore();
+                readHighscore();
 	}
 
 	public static void main(String[] args) {
