@@ -10,6 +10,7 @@ public class Game implements KeyListener{
 	private final int HEIGHT = 900;
 	//The width of the screen.
 	private final int WIDTH = 1600;
+        private final String HIGHSCORE_PATH = "highscore.txt";
 	//The current score.
 	private int score;
 	//The highest achieved score for the current game session.
@@ -172,11 +173,24 @@ public class Game implements KeyListener{
                 // The following overwrites the file if present, so we don't have to bother about any pre-existing files.
                 PrintWriter pw = null;
                 try {
-                        pw = new PrintWriter("highscore.txt", "UTF-8");
+                        pw = new PrintWriter(HIGHSCORE_PATH, "UTF-8");
                         pw.println(highscore);
                         pw.close();
                 } catch(Exception e) {
-                        System.err.println("Something faulty happened while writing to the highscores.txt file");
+                        System.err.println("Something faulty happened while writing to the highscore file");
+                        System.exit(1);
+                }
+        }
+        private void readHighscore() {
+                BufferedReader f = null;
+                try {
+                        f = new BufferedReader(new InputStreamReader(new FileInputStream(HIGHSCORE_PATH), "UTF-8"));
+                        String l;
+                        while((l = f.readLine()) != null) {
+                                highscore = Integer.toInt(l);
+                        }
+                } catch(Exception e) {
+                        System.err.println("Something faulty happened while reading the highscore file");
                         System.exit(1);
                 }
         }
