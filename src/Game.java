@@ -10,7 +10,8 @@ public class Game implements KeyListener{
 	private final int HEIGHT = 900;
 	//The width of the screen.
 	private final int WIDTH = 1600;
-        private final String HIGHSCORE_PATH = "highscore.txt";
+	//The path to the highscore-saving file.
+    private final String HIGHSCORE_PATH = "highscore.txt";
 	//The current score.
 	private int score;
 	//The highest achieved score for the current game session.
@@ -118,11 +119,11 @@ public class Game implements KeyListener{
 	/**
 	 * Spawns a new bullet with random values and adds it to entities.
 	 */
-        private void spawnBullet(){
-                SimpleSpawner ss = new SimpleSpawner(WIDTH, HEIGHT);
-                        //entities.add( new EnemyEntity(30,30,15,15,Color.GREEN,0.002,0.1,0.1) );
-                entities.add(ss.spawnBullet());
-	 }
+    private void spawnBullet(){
+    	SimpleSpawner ss = new SimpleSpawner(WIDTH, HEIGHT);
+        //entities.add( new EnemyEntity(30,30,15,15,Color.GREEN,0.002,0.1,0.1) );
+        entities.add(ss.spawnBullet());
+	}
 
 	/**
 	 * Called when a key has been pressed.
@@ -164,36 +165,36 @@ public class Game implements KeyListener{
 		bufferG.setColor(Color.YELLOW);
 		bufferG.drawString("GAME OVER",500,400);
 		g.drawImage(i,0,0,null);
-                if(score > highscore) {
-                        highscore = score;
-                        saveHighscore();
-                }
+			if(score > highscore) {
+				highscore = score;
+				saveHighscore();
+			}
         }
 
         private void saveHighscore() {
-                // The following overwrites the file if present, so we don't have to bother about any pre-existing files.
-                PrintWriter pw = null;
-                try {
-                        pw = new PrintWriter(HIGHSCORE_PATH, "UTF-8");
-                        pw.println(highscore);
-                        pw.close();
-                } catch(Exception e) {
-                        System.err.println("Something faulty happened while writing to the highscore file");
-                        System.exit(1);
-                }
+			// The following overwrites the file if present, so we don't have to bother about any pre-existing files.
+			PrintWriter pw = null;
+			try {
+				pw = new PrintWriter(HIGHSCORE_PATH, "UTF-8");
+				pw.println(highscore);
+				pw.close();
+			} catch(Exception e) {
+				System.err.println("Something faulty happened while writing to the highscore file");
+				System.exit(1);
+			}
         }
         private void readHighscore() {
-                BufferedReader f = null;
-                try {
-                        f = new BufferedReader(new InputStreamReader(new FileInputStream(HIGHSCORE_PATH), "UTF-8"));
-                        String l;
-                        while((l = f.readLine()) != null) {
-                                highscore = Integer.parseInt(l);
-                        }
-                } catch(Exception e) {
-                        System.err.println("Something faulty happened while reading the highscore file");
-                        System.exit(1);
-                }
+			BufferedReader f = null;
+			try {
+				f = new BufferedReader(new InputStreamReader(new FileInputStream(HIGHSCORE_PATH), "UTF-8"));
+				String l;
+				while((l = f.readLine()) != null) {
+					highscore = Integer.parseInt(l);
+				}
+			} catch(Exception e) {
+				System.err.println("Something faulty happened while reading the highscore file");
+				System.exit(1);
+			}
         }
 
 	/**
@@ -220,7 +221,7 @@ public class Game implements KeyListener{
  		keys.put("left", false);
  		gameOver = false;
  		difficulty = 50;
-                readHighscore();
+        readHighscore();
 	}
 
 	public static void main(String[] args) {
