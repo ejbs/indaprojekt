@@ -1,3 +1,3 @@
 public interface BulletSpawner {
-        EnemyEntity spawnBullet();
+        public EnemyEntity spawnBullet();
 }
