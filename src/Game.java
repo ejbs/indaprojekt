@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.awt.event.*;
-import java.io.PrintWriter;
+import java.io.*;
 
 public class Game implements KeyListener{
 
@@ -187,7 +187,7 @@ public class Game implements KeyListener{
                         f = new BufferedReader(new InputStreamReader(new FileInputStream(HIGHSCORE_PATH), "UTF-8"));
                         String l;
                         while((l = f.readLine()) != null) {
-                                highscore = Integer.toInt(l);
+                                highscore = Integer.parseInt(l);
                         }
                 } catch(Exception e) {
                         System.err.println("Something faulty happened while reading the highscore file");
