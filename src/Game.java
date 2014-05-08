@@ -11,7 +11,7 @@ public class Game implements KeyListener{
 	//The width of the screen.
 	public static final int WIDTH = 1600;
 	//The path to the highscore-saving file.
-        private final String HIGHSCORE_PATH = "highscore.txt";
+    private final String HIGHSCORE_PATH = "highscore.txt";
 	//The current score.
 	public static int score;
 	//The highest achieved score for the current game session.
@@ -244,7 +244,7 @@ public class Game implements KeyListener{
  		keys.put("left", false);
  		gameOver = false;
  		difficulty = 60;
-                readHighscore();
+        readHighscore();
 	}
 
 	public static void main(String[] args) {
