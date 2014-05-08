@@ -219,6 +219,7 @@ public class Game implements KeyListener{
  		keys.put("left", false);
  		gameOver = false;
  		difficulty = 50;
+                readHighscore();
 	}
 
 	public static void main(String[] args) {
