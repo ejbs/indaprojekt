@@ -1,5 +1,9 @@
 import java.awt.*;
 
+/**
+ * This is the PlayerEntity.
+ * It is the entity that the player controls on the screen.
+ */
 public class PlayerEntity implements ScreenEntity {
 
 	private final int TYPE = 0;
@@ -88,8 +92,12 @@ public class PlayerEntity implements ScreenEntity {
 		g.fillRect( (int)getX(), (int)getY(), getWidth(), getHeight() );
 	}
 
-    public void tick() {
-    	if(Game.keys.get("up")){
+        /**
+         * tick() checks for any relevant keys that the player might've pressed and
+         * adjust its velocity and position accordingly
+         */
+        public void tick() {
+                if(Game.keys.get("up")){
 			this.setVelocityY(this.getVelocityY()-this.getEnginePower());
 		}
 		if(Game.keys.get("down")){
