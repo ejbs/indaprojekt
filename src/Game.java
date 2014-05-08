@@ -116,24 +116,10 @@ public class Game implements KeyListener{
 	/**
 	 * Spawns a new bullet with random values and adds it to entities.
 	 */
-	 private void spawnBullet(){
-		 //entities.add( new EnemyEntity(30,30,15,15,Color.GREEN,0.002,0.1,0.1) );
-		if(Math.random() > 0.5) {
-			if(Math.random() > 0.5){
-				entities.add( new EnemyEntity(0, Math.random()*HEIGHT, 15, 15, Color.GREEN, 0.002, 0.1, 0) );
-			}
-			else {
-				entities.add( new EnemyEntity(WIDTH, Math.random()*HEIGHT, 15, 15, Color.GREEN, 0.002, -0.1, 0) );
-			}
-		}
-		else {
-			if(Math.random() > 0.5){
-				entities.add( new EnemyEntity(Math.random()*WIDTH, 0, 15, 15, Color.GREEN, 0.002, 0, 0.1) );
-			}
-			else {
-				entities.add( new EnemyEntity(Math.random()*WIDTH, HEIGHT, 15, 15, Color.GREEN, 0.002, 0, -0.1) );
-			}
-		}
+        private void spawnBullet(){
+                SimpleSpawner ss = new SimpleSpawner(WIDTH, HEIGHT);
+                        //entities.add( new EnemyEntity(30,30,15,15,Color.GREEN,0.002,0.1,0.1) );
+                entities.add(ss.spawnBullet());
 	 }
 
 	/**
