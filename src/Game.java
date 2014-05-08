@@ -7,17 +7,17 @@ import java.io.*;
 public class Game implements KeyListener{
 
 	//The height of the screen.
-	private final int HEIGHT = 900;
+	public static final int HEIGHT = 900;
 	//The width of the screen.
-	private final int WIDTH = 1600;
+	public static final int WIDTH = 1600;
 	//The path to the highscore-saving file.
         private final String HIGHSCORE_PATH = "highscore.txt";
 	//The current score.
-	private int score;
+	public static int score;
 	//The highest achieved score for the current game session.
 	private int highscore;
 	//Increases difficulty value is lowered
-	private int difficulty;
+	public static int difficulty;
 	//Keeps track of whether the player has lost or not.
 	private boolean gameOver;
 	//the visual frame on which everything is displayed.
@@ -236,6 +236,7 @@ public class Game implements KeyListener{
 		entities = new ArrayList<ScreenEntity>();
 		entities.add( new PlayerEntity(300,300,20,20,Color.RED) );
 		spawners.add(new ExperimentalSpawner(WIDTH/2,HEIGHT/2));
+                spawners.add(new SimpleSpawner(WIDTH, HEIGHT));
 		keys = new HashMap<String,Boolean>();
 		keys.put("up", false);
 		keys.put("down", false);
