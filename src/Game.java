@@ -165,6 +165,7 @@ public class Game implements KeyListener{
 		bufferG.drawString("GAME OVER",500,400);
 		g.drawImage(i,0,0,null);
                 if(score > highscore) {
+                        highscore = score;
                         saveHighscore();
                 }
         }
