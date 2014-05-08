@@ -7,9 +7,9 @@ import java.io.*;
 public class Game implements KeyListener{
 
 	//The height of the screen.
-	private final int HEIGHT = 720;
+	private final int HEIGHT = 900;
 	//The width of the screen.
-	private final int WIDTH = 1280;
+	private final int WIDTH = 1600;
 	//The path to the highscore-saving file.
         private final String HIGHSCORE_PATH = "highscore.txt";
 	//The current score.
@@ -31,7 +31,7 @@ public class Game implements KeyListener{
 	//A list of all entities in the game.
 	private ArrayList<ScreenEntity> entities;
 	//A spawner object that deals with the spawning of new bullets.
-	private BulletSpawner spawner;
+	private ArrayList<BulletSpawner> spawners;
 	//A map keeping track of which keys are pressed down.
 	public static HashMap<String,Boolean> keys;
 
@@ -58,7 +58,7 @@ public class Game implements KeyListener{
 				drawScreen();
 				score++;
 				if(loopCounter%difficulty == 0){
-					spawnBullet();
+					spawnBullets();
 				}
 				if(score%500 == 0 && difficulty > 10){
 					difficulty = difficulty-10;
@@ -137,10 +137,12 @@ public class Game implements KeyListener{
 	}
 
 	/**
-	 * Spawns a new bullet with random values and adds it to entities.
+	 * Loops through all of the active BulletSpawners and lets each one spawn a bullet
 	 */
-        private void spawnBullet(){
-                entities.add(spawner.spawnBullet());
+        private void spawnBullets(){
+                for(BulletSpawner s : spawners) {
+                        entities.add(s.spawnBullet());
+                }
 	}
 
 	/**
@@ -219,6 +221,7 @@ public class Game implements KeyListener{
 	 * initializes all values in order to make the game work.
 	 */
 	private void initComponents() {
+                spawners = new ArrayList<BulletSpawner>();
 		frame = new JFrame("DON'T LEAVE THE SCREEN!");
 		frame.setSize(WIDTH,HEIGHT);
 		frame.setVisible(true);
@@ -232,7 +235,7 @@ public class Game implements KeyListener{
 
 		entities = new ArrayList<ScreenEntity>();
 		entities.add( new PlayerEntity(300,300,20,20,Color.RED) );
-		spawner = new SimpleSpawner(WIDTH,HEIGHT);
+		spawners.add(new ExperimentalSpawner(WIDTH/2,HEIGHT/2));
 		keys = new HashMap<String,Boolean>();
 		keys.put("up", false);
 		keys.put("down", false);
