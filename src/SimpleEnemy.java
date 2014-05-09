@@ -13,11 +13,6 @@ public class SimpleEnemy extends EnemyEntity {
                 super.tick();
                 sp.setX(super.getX());
                 sp.setY(super.getY());
-                // This is a bug
-                // When does tick() get called?
-                // Well, when entities is traversed.
-                // And what shouldn't you do?
-                // Modify a list while it is being traversed
                 Game.entities.add(sp.spawnBullet());
         }
 }
