@@ -29,9 +29,9 @@ public class Game implements KeyListener{
 	//An instance of CollisionHandler to keep track of collisions.
 	private CollisionHandler collisions;
 	//A list of all entities in the game.
-	private ArrayList<ScreenEntity> entities;
+	public static ArrayList<ScreenEntity> entities;
 	//A spawner object that deals with the spawning of new bullets.
-	private ArrayList<BulletSpawner> spawners;
+	public static ArrayList<BulletSpawner> spawners;
 	//A map keeping track of which keys are pressed down.
 	public static HashMap<String,Boolean> keys;
 
@@ -235,8 +235,9 @@ public class Game implements KeyListener{
 
 		entities = new ArrayList<ScreenEntity>();
 		entities.add( new PlayerEntity(300,300,20,20,Color.RED) );
-		spawners.add(new ExperimentalSpawner(WIDTH/2,HEIGHT/2));
-                spawners.add(new SimpleSpawner(WIDTH, HEIGHT));
+                entities.add(new SimpleEnemy(100, 100));
+		//spawners.add(new ExperimentalSpawner(WIDTH/2,HEIGHT/2));
+                //spawners.add(new SimpleSpawner(WIDTH, HEIGHT));
 		keys = new HashMap<String,Boolean>();
 		keys.put("up", false);
 		keys.put("down", false);
