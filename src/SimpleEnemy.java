@@ -1,15 +1,18 @@
+import java.awt.Color;
+import java.awt.Graphics;
+
 public class SimpleEnemy extends EnemyEntity {
-        BulletSpawner sp;
+        ExperimentalSpawner sp;
 
         public SimpleEnemy(int x, int y) {
-                super(x, y, 30, 30, Color.PURPLE, 0.002, 1, 1);
+                super(x, y, 30, 30, Color.MAGENTA, 0.002, 1, 1);
                 sp =  new ExperimentalSpawner(x, y);
         }
         
         public void tick() {
                 super.tick();
-                sp.setX(x);
-                sp.setY(y);
+                sp.setX(super.getX());
+                sp.setY(super.getY());
                 sp.spawnBullet();
         }
 }
