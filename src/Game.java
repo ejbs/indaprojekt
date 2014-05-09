@@ -84,6 +84,12 @@ public class Game implements KeyListener{
 	private void calculatePhysics(){
 		//This loop makes the entities move according to their current speed.
                 // We make a copy so that the original ArrayList can be modified by other objects
+                // Example scenario to understand why we don't want to use the original list:
+                // We want to create a ScreenEntity that moves across the screen and emits bullet when tick() is called
+                // When does tick() get called?
+                // Well, when entities is traversed.
+                // And what shouldn't you do?
+                // Modify a list while it is being traversed
                 ArrayList<ScreenEntity> entitiesCopy = new ArrayList<ScreenEntity>(entities);
                 for(ScreenEntity e : e2){
                         e.tick();
