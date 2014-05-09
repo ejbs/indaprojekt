@@ -90,8 +90,9 @@ public class Game implements KeyListener{
                 // Well, when entities is traversed.
                 // And what shouldn't you do?
                 // Modify a list while it is being traversed
+                // NOTE: This is currently a shallow copy
                 ArrayList<ScreenEntity> entitiesCopy = new ArrayList<ScreenEntity>(entities);
-                for(ScreenEntity e : e2){
+                for(ScreenEntity e : entitiesCopy){
                         e.tick();
                 }
 		for(int i = 1; i < entities.size(); i++){
