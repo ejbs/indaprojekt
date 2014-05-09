@@ -83,9 +83,11 @@ public class Game implements KeyListener{
 	 */
 	private void calculatePhysics(){
 		//This loop makes the entities move according to their current speed.
-		for(ScreenEntity e : entities){
+                // We make a copy so that the original ArrayList can be modified by other objects
+                ArrayList<ScreenEntity> entitiesCopy = new ArrayList<ScreenEntity>(entities);
+                for(ScreenEntity e : e2){
                         e.tick();
-		}
+                }
 		for(int i = 1; i < entities.size(); i++){
 			if(collisions.hasCollided(entities.get(0),entities.get(i))){
 				gameOver = true;
