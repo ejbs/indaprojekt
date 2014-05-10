@@ -95,7 +95,7 @@ public class Game implements KeyListener{
                 Iterator<ScreenEntity> iter = entitiesCopy.iterator();
                 ScreenEntity e;
                 double x, y;
-                while(iter.hasNext) {
+                while(iter.hasNext()) {
                         e = iter.next();
                         e.tick();
                         x = e.getX();
