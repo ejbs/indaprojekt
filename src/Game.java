@@ -11,7 +11,7 @@ public class Game implements KeyListener{
 	//The width of the screen.
 	public static final int WIDTH = 1600;
 	//The path to the highscore-saving file.
-    private final String HIGHSCORE_PATH = "highscore.txt";
+        private final String HIGHSCORE_PATH = "highscore.txt";
 	//The current score.
 	public static int score;
 	//The highest achieved score for the current game session.
@@ -92,8 +92,19 @@ public class Game implements KeyListener{
                 // Modify a list while it is being traversed
                 // NOTE: This is currently a shallow copy
                 ArrayList<ScreenEntity> entitiesCopy = new ArrayList<ScreenEntity>(entities);
-                for(ScreenEntity e : entitiesCopy){
+                Iterator<ScreenEntity> iter = entitiesCopy.iterator();
+                ScreenEntity e;
+                double x, y;
+                while(iter.hasNext) {
+                        e = iter.next();
                         e.tick();
+                        x = e.getX();
+                        y = e.getY();
+                        // If outside of screen, remove
+                        if(x < 0 || x > WIDTH ||
+                           y < 0 || y > HEIGHT) {
+                                iter.remove();
+                        }
                 }
 		for(int i = 1; i < entities.size(); i++){
 			if(collisions.hasCollided(entities.get(0),entities.get(i))){
