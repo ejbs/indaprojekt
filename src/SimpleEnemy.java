@@ -13,6 +13,8 @@ public class SimpleEnemy extends EnemyEntity {
                 super.tick();
                 sp.setX(super.getX());
                 sp.setY(super.getY());
-                Game.entities.add(sp.spawnBullet());
+                if(Math.random() > 0.9) {
+                        Game.entities.add(sp.spawnBullet());
+                }
         }
 }
