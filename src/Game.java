@@ -106,6 +106,10 @@ public class Game implements KeyListener{
                                 iter.remove();
                         }
                 }
+                // This is kinda shit
+                // Assuming that the 0th element is the player makes testing some stuff really hard because you need
+                // to actually have a player playing the game, otherwise the 0th element may be a bullet or whatever
+                // and the testing code would just take up a lot more space and time
 		for(int i = 1; i < entities.size(); i++){
 			if(collisions.hasCollided(entities.get(0),entities.get(i))){
 				gameOver = true;
