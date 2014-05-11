@@ -259,7 +259,7 @@ public class Game implements KeyListener{
 
 		entities = new ArrayList<ScreenEntity>();
 		entities.add( new PlayerEntity(300,300,20,20,Color.RED) );
-                entities.add(new SimpleEnemy(100, 100));
+                entities.add(new SimpleEnemy(WIDTH/2, HEIGHT/2));
 		//spawners.add(new ExperimentalSpawner(WIDTH/2,HEIGHT/2));
                 //spawners.add(new SimpleSpawner(WIDTH, HEIGHT));
 		keys = new HashMap<String,Boolean>();
