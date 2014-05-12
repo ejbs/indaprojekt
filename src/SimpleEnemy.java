@@ -7,15 +7,15 @@ public class SimpleEnemy extends EnemyEntity {
 
         public SimpleEnemy(int x, int y) {
                 super(x, y, 30, 30, Color.MAGENTA, 0.002, 0.1, 0.1);
-                sp =  new FunkySpawner(x, y);
+                sp = new FunkySpawner(x, y);
                 first = true;
         }
-        
+
         public void tick() {
                 super.tick();
                 sp.setX(super.getX());
                 sp.setY(super.getY());
-                for(int i = 0; i < 15; i++) {
+                for(int i = 0; i < 2; i++) {
                         Game.entities.add(sp.spawnBullet());
                 }
         }

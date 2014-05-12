@@ -11,7 +11,7 @@ public class Game implements KeyListener{
 	//The width of the screen.
 	public static final int WIDTH = 1600;
 	//The path to the highscore-saving file.
-        private final String HIGHSCORE_PATH = "highscore.txt";
+    private final String HIGHSCORE_PATH = "highscore.txt";
 	//The current score.
 	public static int score;
 	//The highest achieved score for the current game session.
@@ -100,11 +100,6 @@ public class Game implements KeyListener{
                         e.tick();
                         x = e.getX();
                         y = e.getY();
-                        // If outside of screen, remove
-                        if(x < 0 || x > WIDTH ||
-                           y < 0 || y > HEIGHT) {
-                                iter.remove();
-                        }
                 }
                 // This is kinda shit
                 // Assuming that the 0th element is the player makes testing some stuff really hard because you need

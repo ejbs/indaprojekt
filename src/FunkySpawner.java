@@ -15,7 +15,7 @@ public class FunkySpawner implements BulletSpawner {
         public double getX(){
                 return x;
         }
-        
+
 	public void setX(double x){
 		this.x = x;
 	}
@@ -23,7 +23,7 @@ public class FunkySpawner implements BulletSpawner {
 	public double getY(){
 		return y;
 	}
-        
+
 	public void setY(double y){
 		this.y = y;
 	}
@@ -33,5 +33,5 @@ public class FunkySpawner implements BulletSpawner {
                                        Math.cos(step*currentStep),
                                        Math.sin(step*currentStep));
         }
-        
+
 }
