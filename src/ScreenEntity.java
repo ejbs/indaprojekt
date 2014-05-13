@@ -11,6 +11,8 @@ public interface ScreenEntity {
 	void setVelocityY(double d);
 	int getWidth();
 	int getHeight();
+	void setSpawner(BulletSpawner bs);
+	EnemyEntity spawnBullet();
 	Color getColor();
         /**
          * Is the object collideable/solid?

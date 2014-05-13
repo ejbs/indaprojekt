@@ -13,8 +13,9 @@ public class EnemyEntity implements ScreenEntity{
 	private double enginePower;
 	private int width;
 	private int height;
+	public BulletSpawner bs;
 
-	public EnemyEntity(double x, double y, int width, int height, Color c, double enginePower, double xVel, double yVel) {
+	public EnemyEntity(double x, double y, int width, int height, Color c, double enginePower, double xVel, double yVel, BulletSpawner bs) {
 		this.xPos = x;
 		this.yPos = y;
 		this.width = width;
@@ -24,6 +25,9 @@ public class EnemyEntity implements ScreenEntity{
 		this.enginePower = enginePower;
 		this.xVel = xVel;
 		this.yVel = yVel;
+		if(bs != null){
+			this.bs = bs;
+		}
 	}
 
 	public double getX(){
@@ -85,6 +89,17 @@ public class EnemyEntity implements ScreenEntity{
 	public void draw(Graphics g){
 		g.setColor(getColor());
 		g.fillRect( (int)getX(), (int)getY(), getWidth(), getHeight() );
+	}
+
+	public void setSpawner(BulletSpawner bs) {
+		this.bs = bs;
+	}
+
+	public EnemyEntity spawnBullet(){
+		if(bs != null){
+			return bs.spawnBullet(xPos, yPos);
+		}
+		return null;
 	}
 
 	public void tick() {

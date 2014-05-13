@@ -54,7 +54,7 @@ public class Game implements KeyListener{
 		int loopCounter = 0;
 
 		while (!gameOver){
-                        if(loopCounter%10 == 0){
+            if(loopCounter%10 == 0){
 				drawScreen();
 				score++;
 				if(loopCounter%difficulty == 0){
@@ -82,29 +82,10 @@ public class Game implements KeyListener{
 	 * Does all calculations regarding physics.
 	 */
 	private void calculatePhysics(){
-		//This loop makes the entities move according to their current speed.
-                // We make a copy so that the original ArrayList can be modified by other objects
-                // Example scenario to understand why we don't want to use the original list:
-                // We want to create a ScreenEntity that moves across the screen and emits bullet when tick() is called
-                // When does tick() get called?
-                // Well, when entities is traversed.
-                // And what shouldn't you do?
-                // Modify a list while it is being traversed
-                // NOTE: This is currently a shallow copy
-                ArrayList<ScreenEntity> entitiesCopy = new ArrayList<ScreenEntity>(entities);
-                Iterator<ScreenEntity> iter = entitiesCopy.iterator();
-                ScreenEntity e;
-                double x, y;
-                while(iter.hasNext()) {
-                        e = iter.next();
-                        e.tick();
-                        x = e.getX();
-                        y = e.getY();
-                }
-                // This is kinda shit
-                // Assuming that the 0th element is the player makes testing some stuff really hard because you need
-                // to actually have a player playing the game, otherwise the 0th element may be a bullet or whatever
-                // and the testing code would just take up a lot more space and time
+		for(ScreenEntity e: entities){
+			e.tick();
+		}
+
 		for(int i = 1; i < entities.size(); i++){
 			if(collisions.hasCollided(entities.get(0),entities.get(i))){
 				gameOver = true;
@@ -158,10 +139,15 @@ public class Game implements KeyListener{
 	/**
 	 * Loops through all of the active BulletSpawners and lets each one spawn a bullet
 	 */
-        private void spawnBullets(){
-                for(BulletSpawner s : spawners) {
-                        entities.add(s.spawnBullet());
-                }
+    private void spawnBullets(){
+		ArrayList<ScreenEntity> entitiesToAdd = new ArrayList<ScreenEntity>();
+		for(ScreenEntity e: entities){
+			EnemyEntity tmp = e.spawnBullet();
+			if(tmp != null){
+				entitiesToAdd.add(tmp);
+			}
+		}
+		entities.addAll(entitiesToAdd);
 	}
 
 	/**
@@ -254,9 +240,8 @@ public class Game implements KeyListener{
 
 		entities = new ArrayList<ScreenEntity>();
 		entities.add( new PlayerEntity(300,300,20,20,Color.RED) );
-                entities.add(new SimpleEnemy(WIDTH/2, HEIGHT/2));
-		//spawners.add(new ExperimentalSpawner(WIDTH/2,HEIGHT/2));
-                //spawners.add(new SimpleSpawner(WIDTH, HEIGHT));
+		//entities.add( new EnemyEntity(600,600,15,15,Color.WHITE,0.001,0,0,null) );
+		entities.add( new EnemyEntity(600,600,15,15,Color.WHITE,0.001,0,0,new FunkySpawner() ) );
 		keys = new HashMap<String,Boolean>();
 		keys.put("up", false);
 		keys.put("down", false);

@@ -87,6 +87,13 @@ public class PlayerEntity implements ScreenEntity {
 		return TYPE;
 	}
 
+	public void setSpawner(BulletSpawner bs){
+	}
+
+	public EnemyEntity spawnBullet(){
+		return null;
+	}
+
 	public void draw(Graphics g){
 		g.setColor(getColor());
 		g.fillRect( (int)getX(), (int)getY(), getWidth(), getHeight() );

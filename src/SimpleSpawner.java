@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.*;
 
 
-public class SimpleSpawner implements BulletSpawner {
+public class SimpleSpawner {
         private final int WIDTH, HEIGHT;
         public SimpleSpawner(int width, int height) {
                 this.WIDTH = width;
