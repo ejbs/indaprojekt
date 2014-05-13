@@ -117,5 +117,7 @@ public class PlayerEntity implements ScreenEntity {
 		if(Game.keys.get("right")){
 			this.setVelocityX(this.getVelocityX()+this.getEnginePower());
 		}
+                this.xPos += this.xVel;
+		this.yPos += this.yVel;
 	}
 }
