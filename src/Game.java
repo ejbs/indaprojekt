@@ -127,6 +127,7 @@ public class Game implements KeyListener{
 	 */
 	private String getDifficulty(){
 		switch(difficulty){
+				case 60: return "EASY";
                 case 50: return "NORMAL";
                 case 40: return "HARD";
                 case 30: return "VERY HARD";
@@ -226,7 +227,6 @@ public class Game implements KeyListener{
 	 * initializes all values in order to make the game work.
 	 */
 	private void initComponents() {
-                spawners = new ArrayList<BulletSpawner>();
 		frame = new JFrame("DON'T LEAVE THE SCREEN!");
 		frame.setSize(WIDTH,HEIGHT);
 		frame.setVisible(true);
@@ -248,7 +248,7 @@ public class Game implements KeyListener{
 		keys.put("right", false);
  		keys.put("left", false);
  		gameOver = false;
- 		difficulty = 60;
+ 		difficulty = 70;
         readHighscore();
 	}
 
