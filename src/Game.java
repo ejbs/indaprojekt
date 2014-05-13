@@ -240,8 +240,8 @@ public class Game implements KeyListener{
 
 		entities = new ArrayList<ScreenEntity>();
 		entities.add( new PlayerEntity(300,300,20,20,Color.RED) );
-		//entities.add( new EnemyEntity(600,600,15,15,Color.WHITE,0.001,0,0,null) );
-		entities.add( new EnemyEntity(600,600,15,15,Color.WHITE,0.001,0,0,new FunkySpawner() ) );
+		entities.add( new EnemyEntity(600,600,15,15,Color.WHITE,0.001,0,0,new ExperimentalSpawner()) );
+		//entities.add( new EnemyEntity(600,600,15,15,Color.WHITE,0.001,0,0,new FunkySpawner() ) );
 		keys = new HashMap<String,Boolean>();
 		keys.put("up", false);
 		keys.put("down", false);
