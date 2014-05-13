@@ -2,8 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
-
+/**
+ * This is a special kind of spawner as it spawns its bullets 'globally'
+ * on the edges of the screen (and not from a specific point on screen).
+ * Therefore it does not implement the BulletSpawner interface.
+ */
 public class SimpleSpawner {
+        // WIDTH and HEIGHT refers to the width and the height of the screen
         private final int WIDTH, HEIGHT;
         public SimpleSpawner(int width, int height) {
                 this.WIDTH = width;
