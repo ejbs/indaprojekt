@@ -1,4 +1,9 @@
 import java.awt.*;
+
+/**
+ * The ExperimentalSpawner is a small test spawner
+ * which spawns bullets in a relatively interesting pattern.
+ */
 public class ExperimentalSpawner implements BulletSpawner {
         private double z1, z2;
         public ExperimentalSpawner () {
