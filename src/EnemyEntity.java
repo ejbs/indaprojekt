@@ -6,8 +6,7 @@ import java.awt.Graphics;
  * The EnemyEntity class defines basic behavior and fields 
  * for other objects such as bullets and bosses to inherit from.
  */
-public class EnemyEntity implements ScreenEntity{
-        private final int TYPE = 1;
+public class EnemyEntity implements ScreenEntity {
         // Current color of the EnemyEntity
         private Color color;
 	private boolean intersectable;
