@@ -31,7 +31,7 @@ public class Game implements KeyListener{
 	//A list of all entities in the game.
 	public static ArrayList<ScreenEntity> entities;
 	//A spawner object that deals with the spawning of new bullets.
-	public static ArrayList<BulletSpawner> spawners;
+	private static ArrayList<BulletSpawner> spawners;
 	//A map keeping track of which keys are pressed down.
 	public static HashMap<String,Boolean> keys;
 	//An instance of Simple spawner that is used throughout the game.
