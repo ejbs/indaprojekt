@@ -104,6 +104,7 @@ public class PlayerEntity implements ScreenEntity {
          * adjust its velocity and position accordingly
          */
         public void tick() {
+                super.tick();
                 if(Game.keys.get("up")){
 			this.setVelocityY(this.getVelocityY()-this.getEnginePower());
 		}
@@ -116,7 +117,5 @@ public class PlayerEntity implements ScreenEntity {
 		if(Game.keys.get("right")){
 			this.setVelocityX(this.getVelocityX()+this.getEnginePower());
 		}
-		this.xPos += this.xVel;
-		this.yPos += this.yVel;
 	}
 }
