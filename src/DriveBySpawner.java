@@ -17,7 +17,7 @@ public class DriveBySpawner implements BulletSpawner {
 			ArrayList<EnemyEntity> spawnedBullets = new ArrayList<EnemyEntity>();
 			if(timer > 0){
 				timer--;
-				return null;
+				return new ArrayList<EnemyEntity>();
 			}
 				timer = 10;
                 spawnedBullets.add( new EnemyEntity(x+(width/2), y+(height/2), 10, 10, Color.GREEN, 0.00001,

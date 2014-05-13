@@ -6,7 +6,7 @@ public class BossSpawner implements BulletSpawner {
 
 	public BossSpawner(){
 		this.step = 0.05;
-                this.currentStep = 0;
+        this.currentStep = 0;
 	}
 
 	public ArrayList<EnemyEntity> spawnBullet(double x, double y, int width, int height){

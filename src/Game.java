@@ -11,7 +11,7 @@ public class Game implements KeyListener{
 	//The width of the screen.
 	public static final int WIDTH = 1600;
 	//The path to the highscore-saving file.
-    private final String HIGHSCORE_PATH = "highscore.txt";
+	private final String HIGHSCORE_PATH = "highscore.txt";
 	//The current score.
 	public static int score;
 	//The highest achieved score for the current game session.
@@ -38,8 +38,8 @@ public class Game implements KeyListener{
 	public SimpleSpawner sp;
 
 	/**
-	 * The constructor to call in order to initiate the game.
-	 */
+	* The constructor to call in order to initiate the game.
+	*/
 	public Game() {
 		initComponents();
 		gameLoop();
@@ -47,16 +47,16 @@ public class Game implements KeyListener{
 	}
 
 	/**
-	 * The never ending loop sustaining the game's calculations and screen updates.
-	 */
-        //TODO: remove bullets when they exit the screen
-        //      maybe put the screen drawing in a new thread?
+	* The never ending loop sustaining the game's calculations and screen updates.
+	*/
+	//TODO: remove bullets when they exit the screen
+	//      maybe put the screen drawing in a new thread?
 	private void gameLoop() {
 		//a counter that helps with the fps determination and bullet spawning.
 		int loopCounter = 0;
 
 		while (!gameOver){
-            if(loopCounter%10 == 0){
+			if(loopCounter%10 == 0){
 				drawScreen();
 				score++;
 				if(loopCounter%difficulty == 0){
@@ -81,8 +81,8 @@ public class Game implements KeyListener{
 	}
 
 	/**
-	 * Does all calculations regarding physics.
-	 */
+	* Does all calculations regarding physics.
+	*/
 	private void calculatePhysics(){
 		for(ScreenEntity e: entities){
 			e.tick();
@@ -102,8 +102,8 @@ public class Game implements KeyListener{
 	}
 
 	/**
-	 * Called in order to repaint the background and all entities on the screen.
-	 */
+	* Called in order to repaint the background and all entities on the screen.
+	*/
 	private void drawScreen(){
 		bufferG.setColor(Color.BLACK);
 		bufferG.fillRect(0,0,WIDTH,HEIGHT);
@@ -123,27 +123,27 @@ public class Game implements KeyListener{
 	}
 
 	/**
-	 * Returns a String representation of the current difficulty.
-	 *
-	 * @return a String representation of the current difficulty.
-	 */
+	* Returns a String representation of the current difficulty.
+	*
+	* @return a String representation of the current difficulty.
+	*/
 	private String getDifficulty(){
 		switch(difficulty){
-				case 80: return "PLAYGROUND";
-				case 60: return "EASY";
-                case 50: return "NORMAL";
-                case 40: return "HARD";
-                case 30: return "VERY HARD";
-                case 20: return "NIGHTMARE";
-                case 10: return "DEATH WISH";
-                default: return "WALK IN THE PARK";
+			case 80: return "PLAYGROUND";
+			case 60: return "EASY";
+			case 50: return "NORMAL";
+			case 40: return "HARD";
+			case 30: return "VERY HARD";
+			case 20: return "NIGHTMARE";
+			case 10: return "DEATH WISH";
+			default: return "WALK IN THE PARK";
 		}
 	}
 
 	/**
-	 * Loops through all of the active BulletSpawners and lets each one spawn a bullet
-	 */
-    private void spawnBullets(){
+	* Loops through all of the active BulletSpawners and lets each one spawn a bullet
+	*/
+	private void spawnBullets(){
 		ArrayList<ScreenEntity> entitiesToAdd = new ArrayList<ScreenEntity>();
 		for(ScreenEntity e: entities){
 			ArrayList<EnemyEntity> tmp = e.spawnBullet();
@@ -152,40 +152,42 @@ public class Game implements KeyListener{
 			}
 		}
 		entities.addAll(entitiesToAdd);
-		entities.add(sp.spawnBullet());
-	}
-
-	/**
-	 * Called when a key has been pressed.
-	 * @param e The KeyEvent generated
-	 */
-	public void keyPressed(KeyEvent e){
-		switch(e.getKeyCode()){
-                case 38: keys.put("up", true);break;
-                case 40: keys.put("down", true);break;
-                case 37: keys.put("left", true);break;
-                case 39: keys.put("right", true);break;
+		if(sp != null){
+			entities.add(sp.spawnBullet());
 		}
 	}
 
 	/**
-	 * Called when a key has been typed.
-	 * @param e The KeyEvent generated
-	 */
+	* Called when a key has been pressed.
+	* @param e The KeyEvent generated
+	*/
+	public void keyPressed(KeyEvent e){
+		switch(e.getKeyCode()){
+			case 38: keys.put("up", true);break;
+			case 40: keys.put("down", true);break;
+			case 37: keys.put("left", true);break;
+			case 39: keys.put("right", true);break;
+		}
+	}
+
+	/**
+	* Called when a key has been typed.
+	* @param e The KeyEvent generated
+	*/
 	public void keyTyped(KeyEvent e){
 		//This KeyEvent is ignored.
 	}
 
 	/**
-	 * Called when a key has been released.
-	 * @param e The KeyEvent generated
-	 */
+	* Called when a key has been released.
+	* @param e The KeyEvent generated
+	*/
 	public void keyReleased(KeyEvent e){
 		switch(e.getKeyCode()){
-                case 38: keys.put("up", false);break;
-                case 40: keys.put("down", false);break;
-                case 37: keys.put("left", false);break;
-                case 39: keys.put("right", false);break;
+			case 38: keys.put("up", false);break;
+			case 40: keys.put("down", false);break;
+			case 37: keys.put("left", false);break;
+			case 39: keys.put("right", false);break;
 		}
 
 	}
@@ -195,11 +197,11 @@ public class Game implements KeyListener{
 		bufferG.setColor(Color.YELLOW);
 		bufferG.drawString("GAME OVER",WIDTH/4,HEIGHT/2);
 		g.drawImage(i,0,0,null);
-                if(score > highscore) {
-                        highscore = score;
-                        saveHighscore();
-                }
-        }
+		if(score > highscore) {
+			highscore = score;
+			saveHighscore();
+		}
+	}
 
 	private void saveHighscore() {
 		// The following overwrites the file if present, so we don't have to bother about any pre-existing files.
@@ -229,8 +231,8 @@ public class Game implements KeyListener{
 	}
 
 	/**
-	 * initializes all values in order to make the game work.
-	 */
+	* initializes all values in order to make the game work.
+	*/
 	private void initComponents() {
 		frame = new JFrame("DON'T LEAVE THE SCREEN!");
 		frame.setSize(WIDTH,HEIGHT);
@@ -243,27 +245,28 @@ public class Game implements KeyListener{
 		bufferG = i.getGraphics();
 		collisions = new CollisionHandler();
 
-		sp = new SimpleSpawner(WIDTH,HEIGHT);
+		//sp = new SimpleSpawner(WIDTH,HEIGHT);
 		entities = new ArrayList<ScreenEntity>();
 		entities.add( new PlayerEntity(100,300,20,20,Color.RED) );
 		/*entities.add( new EnemyEntity(600,600,15,15,Color.WHITE,0.001,0,0,new ExperimentalSpawner()) );
 		entities.add( new EnemyEntity(600,600,15,15,Color.WHITE,0.001,0,0,new FunkySpawner()) );
 		entities.add( new EnemyEntity(1000,600,15,15,Color.WHITE,0.001,0,0,new FunkySpawner()) );
 		entities.add( new EnemyEntity(500,350,15,15,Color.WHITE,0.001,0,0,new FunkySpawner()) );
-		entities.add( new EnemyEntity(750,250,15,15,Color.WHITE,0.001,0,0,new FunkySpawner()) );*/
+		entities.add( new EnemyEntity(750,250,15,15,Color.WHITE,0.001,0,0,new FunkySpawner()) );
 		entities.add( new EnemyEntity(150,550,15,15,Color.WHITE,0.001,0,0,new FunkySpawner()) );
-		/*entities.add( new EnemyEntity(0,100,15,15,Color.WHITE,0.001,0.1,0,new DriveBySpawner()) );
+		entities.add( new EnemyEntity(0,100,15,15,Color.WHITE,0.001,0.1,0,new DriveBySpawner()) );
 		entities.add( new EnemyEntity(0,350,15,15,Color.WHITE,0.001,0.1,0,new DriveBySpawner()) );
 		entities.add( new EnemyEntity(0,600,15,15,Color.WHITE,0.001,0.1,0,new DriveBySpawner()) );
 		entities.add( new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.1,0,new BossSpawner()) );*/
+		entities.add( new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.1,0,new RingSpawner()) );
 		keys = new HashMap<String,Boolean>();
 		keys.put("up", false);
 		keys.put("down", false);
 		keys.put("right", false);
- 		keys.put("left", false);
- 		gameOver = false;
- 		difficulty = 80;
-        readHighscore();
+		keys.put("left", false);
+		gameOver = false;
+		difficulty = 80;
+		readHighscore();
 	}
 
 	public static void main(String[] args) {
