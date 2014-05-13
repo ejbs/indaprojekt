@@ -97,7 +97,7 @@ public class EnemyEntity implements ScreenEntity{
 
 	public EnemyEntity spawnBullet(){
 		if(bs != null){
-			return bs.spawnBullet(xPos, yPos);
+			return bs.spawnBullet(xPos, yPos, width, height);
 		}
 		return null;
 	}
