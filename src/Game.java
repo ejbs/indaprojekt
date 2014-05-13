@@ -34,6 +34,8 @@ public class Game implements KeyListener{
 	public static ArrayList<BulletSpawner> spawners;
 	//A map keeping track of which keys are pressed down.
 	public static HashMap<String,Boolean> keys;
+	//An instance of Simple spawner that is used throughout the game.
+	public SimpleSpawner sp;
 
 	/**
 	 * The constructor to call in order to initiate the game.
@@ -149,6 +151,7 @@ public class Game implements KeyListener{
 			}
 		}
 		entities.addAll(entitiesToAdd);
+		entities.add(sp.spawnBullet());
 	}
 
 	/**
@@ -239,6 +242,7 @@ public class Game implements KeyListener{
 		bufferG = i.getGraphics();
 		collisions = new CollisionHandler();
 
+		sp = new SimpleSpawner(WIDTH,HEIGHT);
 		entities = new ArrayList<ScreenEntity>();
 		entities.add( new PlayerEntity(100,300,20,20,Color.RED) );
 		/*entities.add( new EnemyEntity(600,600,15,15,Color.WHITE,0.001,0,0,new ExperimentalSpawner()) );
@@ -250,7 +254,7 @@ public class Game implements KeyListener{
 		entities.add( new EnemyEntity(0,100,15,15,Color.WHITE,0.001,0.1,0,new DriveBySpawner()) );
 		entities.add( new EnemyEntity(0,350,15,15,Color.WHITE,0.001,0.1,0,new DriveBySpawner()) );
 		entities.add( new EnemyEntity(0,600,15,15,Color.WHITE,0.001,0.1,0,new DriveBySpawner()) );*/
-		entities.add( new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.05,0,new BossSpawner()) );
+		entities.add( new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.1,0,new BossSpawner()) );
 		keys = new HashMap<String,Boolean>();
 		keys.put("up", false);
 		keys.put("down", false);

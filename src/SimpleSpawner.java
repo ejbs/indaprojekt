@@ -12,18 +12,18 @@ public class SimpleSpawner {
         public EnemyEntity spawnBullet() {
                 if(Math.random() > 0.5) {
 			if(Math.random() > 0.5){
-			       return new EnemyEntity(0, Math.random()*HEIGHT, 10, 10, Color.GREEN, 0.002, 0.2, 0);
+			       return new EnemyEntity(0, Math.random()*HEIGHT, 10, 10, Color.GREEN, 0.002, 0.2, 0,null);
 			}
 			else {
-				return new EnemyEntity(WIDTH, Math.random()*HEIGHT, 10, 10, Color.GREEN, 0.002, -0.2, 0);
+				return new EnemyEntity(WIDTH, Math.random()*HEIGHT, 10, 10, Color.GREEN, 0.002, -0.2, 0,null);
 			}
 		}
 		else {
 			if(Math.random() > 0.5){
-				return new EnemyEntity(Math.random()*WIDTH, 0, 10, 10, Color.GREEN, 0.002, 0, 0.2);
+				return new EnemyEntity(Math.random()*WIDTH, 0, 10, 10, Color.GREEN, 0.002, 0, 0.2,null);
 			}
 			else {
-				return new EnemyEntity(Math.random()*WIDTH, HEIGHT, 10, 10, Color.GREEN, 0.002, 0, -0.2);
+				return new EnemyEntity(Math.random()*WIDTH, HEIGHT, 10, 10, Color.GREEN, 0.002, 0, -0.2,null);
 			}
 		}
         }
