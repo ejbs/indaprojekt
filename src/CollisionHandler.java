@@ -1,3 +1,7 @@
+/**
+ * The CollisionHandler class implements collisions between objects through the hasCollided method.
+ * It operates with the assumption that the objects are rectangles.
+ */
 public class CollisionHandler {
 
 	public CollisionHandler(){
