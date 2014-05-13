@@ -1,9 +1,10 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 
 /**
- * The EnemyEntity class defines basic behavior and fields 
+ * The EnemyEntity class defines basic behavior and fields
  * for other objects such as bullets and bosses to inherit from.
  */
 public class EnemyEntity implements ScreenEntity {
@@ -16,14 +17,15 @@ public class EnemyEntity implements ScreenEntity {
         // Current x- and y-velocity
 	private double xVel;
 	private double yVel;
-        
+
 	private double enginePower;
         // The width and height of the EnemyEntity
 	private int width;
 	private int height;
         // The BulletSpawner which EnemyEntity may use to spawn bullets with.
         // May be null, in which case no bullets will be spawned (see EnemyEntity.spawnBullet())
-	public BulletSpawner bs;
+	public ArrayList<BulletSpawner> bs;
+	private final int TYPE = 1;
 
 	public EnemyEntity(double x, double y, int width, int height, Color c, double enginePower, double xVel, double yVel, BulletSpawner bs) {
 		this.xPos = x;
@@ -35,8 +37,9 @@ public class EnemyEntity implements ScreenEntity {
 		this.enginePower = enginePower;
 		this.xVel = xVel;
 		this.yVel = yVel;
+		this.bs = new ArrayList<BulletSpawner>();
 		if(bs != null){
-			this.bs = bs;
+			this.bs.add(bs);
 		}
 	}
 
@@ -105,16 +108,20 @@ public class EnemyEntity implements ScreenEntity {
 		g.fillRect( (int)getX(), (int)getY(), getWidth(), getHeight() );
 	}
 
-	public void setSpawner(BulletSpawner bs) {
-		this.bs = bs;
+	public void addSpawner(BulletSpawner bs) {
+		this.bs.add(bs);
 	}
-        
+
         /**
          * A call to spawnBullet() may return null if bs is null, otherwise will return whatever bs.spawnBullet() returns (most likely an EnemyEntity object).
          */
-	public EnemyEntity spawnBullet(){
-		if(bs != null){
-			return bs.spawnBullet(xPos, yPos, width, height);
+	public ArrayList<EnemyEntity> spawnBullet(){
+		if(bs.size() > 0){
+			ArrayList<EnemyEntity> bulletsSpawned = new ArrayList<EnemyEntity>();
+			for(BulletSpawner s: bs){
+				bulletsSpawned.addAll(s.spawnBullet(xPos, yPos, width, height));
+			}
+			return bulletsSpawned;
 		}
 		return null;
 	}

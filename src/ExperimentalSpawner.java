@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * The ExperimentalSpawner is a small test spawner
@@ -9,12 +10,14 @@ public class ExperimentalSpawner implements BulletSpawner {
         public ExperimentalSpawner () {
         }
 
-        public EnemyEntity spawnBullet(double x, double y, int width, int height) {
+        public ArrayList<EnemyEntity> spawnBullet(double x, double y, int width, int height) {
+			ArrayList<EnemyEntity> spawnedBullets = new ArrayList<EnemyEntity>();
                 z1 += 0.1;
                 z2 += 0.3;
-                return new EnemyEntity(x+(width/2), y+(height/2), 10, 10, Color.GREEN, 0.002,
+                spawnedBullets.add( new EnemyEntity(x+(width/2), y+(height/2), 10, 10, Color.GREEN, 0.002,
                                        Math.sin(z1)/3,
                                        Math.cos(z2)/3,
-                                       null);
+                                       null) );
+                return spawnedBullets;
         }
 }

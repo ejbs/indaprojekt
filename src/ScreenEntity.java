@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public interface ScreenEntity {
 	double getX();
@@ -11,8 +12,8 @@ public interface ScreenEntity {
 	void setVelocityY(double d);
 	int getWidth();
 	int getHeight();
-	void setSpawner(BulletSpawner bs);
-	EnemyEntity spawnBullet();
+	void addSpawner(BulletSpawner bs);
+	ArrayList<EnemyEntity> spawnBullet();
 	Color getColor();
         /**
          * Is the object collideable/solid?

@@ -129,6 +129,7 @@ public class Game implements KeyListener{
 	 */
 	private String getDifficulty(){
 		switch(difficulty){
+				case 80: return "PLAYGROUND";
 				case 60: return "EASY";
                 case 50: return "NORMAL";
                 case 40: return "HARD";
@@ -145,9 +146,9 @@ public class Game implements KeyListener{
     private void spawnBullets(){
 		ArrayList<ScreenEntity> entitiesToAdd = new ArrayList<ScreenEntity>();
 		for(ScreenEntity e: entities){
-			EnemyEntity tmp = e.spawnBullet();
+			ArrayList<EnemyEntity> tmp = e.spawnBullet();
 			if(tmp != null){
-				entitiesToAdd.add(tmp);
+				entitiesToAdd.addAll(tmp);
 			}
 		}
 		entities.addAll(entitiesToAdd);
@@ -249,19 +250,19 @@ public class Game implements KeyListener{
 		entities.add( new EnemyEntity(600,600,15,15,Color.WHITE,0.001,0,0,new FunkySpawner()) );
 		entities.add( new EnemyEntity(1000,600,15,15,Color.WHITE,0.001,0,0,new FunkySpawner()) );
 		entities.add( new EnemyEntity(500,350,15,15,Color.WHITE,0.001,0,0,new FunkySpawner()) );
-		entities.add( new EnemyEntity(750,250,15,15,Color.WHITE,0.001,0,0,new FunkySpawner()) );
+		entities.add( new EnemyEntity(750,250,15,15,Color.WHITE,0.001,0,0,new FunkySpawner()) );*/
 		entities.add( new EnemyEntity(150,550,15,15,Color.WHITE,0.001,0,0,new FunkySpawner()) );
-		entities.add( new EnemyEntity(0,100,15,15,Color.WHITE,0.001,0.1,0,new DriveBySpawner()) );
+		/*entities.add( new EnemyEntity(0,100,15,15,Color.WHITE,0.001,0.1,0,new DriveBySpawner()) );
 		entities.add( new EnemyEntity(0,350,15,15,Color.WHITE,0.001,0.1,0,new DriveBySpawner()) );
-		entities.add( new EnemyEntity(0,600,15,15,Color.WHITE,0.001,0.1,0,new DriveBySpawner()) );*/
-		entities.add( new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.1,0,new BossSpawner()) );
+		entities.add( new EnemyEntity(0,600,15,15,Color.WHITE,0.001,0.1,0,new DriveBySpawner()) );
+		entities.add( new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.1,0,new BossSpawner()) );*/
 		keys = new HashMap<String,Boolean>();
 		keys.put("up", false);
 		keys.put("down", false);
 		keys.put("right", false);
  		keys.put("left", false);
  		gameOver = false;
- 		difficulty = 70;
+ 		difficulty = 80;
         readHighscore();
 	}
 

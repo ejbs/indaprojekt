@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * This is the PlayerEntity.
@@ -87,10 +88,10 @@ public class PlayerEntity implements ScreenEntity {
 		return TYPE;
 	}
 
-	public void setSpawner(BulletSpawner bs){
+	public void addSpawner(BulletSpawner bs){
 	}
 
-	public EnemyEntity spawnBullet(){
+	public ArrayList<EnemyEntity> spawnBullet(){
 		return null;
 	}
 
@@ -104,8 +105,7 @@ public class PlayerEntity implements ScreenEntity {
          * adjust its velocity and position accordingly
          */
         public void tick() {
-                super.tick();
-                if(Game.keys.get("up")){
+        if(Game.keys.get("up")){
 			this.setVelocityY(this.getVelocityY()-this.getEnginePower());
 		}
 		if(Game.keys.get("down")){
