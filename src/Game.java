@@ -260,10 +260,9 @@ public class Game implements KeyListener{
 		bufferG = i.getGraphics();
 		collisions = new CollisionHandler();
 
-		//sp = new SimpleSpawner(WIDTH,HEIGHT);
+		sp = new SimpleSpawner(WIDTH,HEIGHT);
 		entities = new ArrayList<ScreenEntity>();
 		entities.add( new PlayerEntity(100,300,20,20,Color.RED) );
-		//entities.add( new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.1,0,new RingSpawner()) );
 		keys = new HashMap<String,Boolean>();
 		keys.put("up", false);
 		keys.put("down", false);
@@ -276,7 +275,9 @@ public class Game implements KeyListener{
                 ArrayList<LevelNode> nodes = new ArrayList<LevelNode>();
                 ArrayList<EnemyEntity> en = new ArrayList<EnemyEntity>();
                 en.add(new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.1,0,new RingSpawner()));
-                nodes.add(new SimpleLevelNode(100, en));
+                nodes.add(new SimpleLevelNode(60, en));
+                nodes.add(new SimpleLevelNode(80, en));
+                nodes.add(new SimpleLevelNode(70, en));
                 
                 currentLevel = new Level(nodes);
 	}
