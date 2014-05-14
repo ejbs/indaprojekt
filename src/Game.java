@@ -248,16 +248,6 @@ public class Game implements KeyListener{
 		//sp = new SimpleSpawner(WIDTH,HEIGHT);
 		entities = new ArrayList<ScreenEntity>();
 		entities.add( new PlayerEntity(100,300,20,20,Color.RED) );
-		/*entities.add( new EnemyEntity(600,600,15,15,Color.WHITE,0.001,0,0,new ExperimentalSpawner()) );
-		entities.add( new EnemyEntity(600,600,15,15,Color.WHITE,0.001,0,0,new FunkySpawner()) );
-		entities.add( new EnemyEntity(1000,600,15,15,Color.WHITE,0.001,0,0,new FunkySpawner()) );
-		entities.add( new EnemyEntity(500,350,15,15,Color.WHITE,0.001,0,0,new FunkySpawner()) );
-		entities.add( new EnemyEntity(750,250,15,15,Color.WHITE,0.001,0,0,new FunkySpawner()) );
-		entities.add( new EnemyEntity(150,550,15,15,Color.WHITE,0.001,0,0,new FunkySpawner()) );
-		entities.add( new EnemyEntity(0,100,15,15,Color.WHITE,0.001,0.1,0,new DriveBySpawner()) );
-		entities.add( new EnemyEntity(0,350,15,15,Color.WHITE,0.001,0.1,0,new DriveBySpawner()) );
-		entities.add( new EnemyEntity(0,600,15,15,Color.WHITE,0.001,0.1,0,new DriveBySpawner()) );
-		entities.add( new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.1,0,new BossSpawner()) );*/
 		entities.add( new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.1,0,new RingSpawner()) );
 		keys = new HashMap<String,Boolean>();
 		keys.put("up", false);
