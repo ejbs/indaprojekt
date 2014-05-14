@@ -7,7 +7,7 @@ public class SimpleLevelNode {
         private int final activationDifficulty;
         private ArrayList<EnemyEntity> entities;
 
-        public LevelNode(int activationDifficulty, ArrayList<EnemyEntity> entities) {
+        public SimpleLevelNode(int activationDifficulty, ArrayList<EnemyEntity> entities) {
                 this.entities = entities;
                 this.activationDifficulty = activationDifficulty;
         }
