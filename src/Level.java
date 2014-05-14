@@ -30,7 +30,13 @@ public class Level {
         }
         
         
-        public addSimpleNode(int activationDifficulty, ArrayList<EnemyEntity> spawnThese) {
-                
+        public void addSimpleNode(int activationDifficulty, ArrayList<EnemyEntity> spawnThese) {
+                SimpleNode sn = SimpleNode(activationDifficulty, spawnThese);
+                int i = 0;
+                int diff = sn.getActivationDifficulty();
+                while(i < levelNodes.size() && diff <= levelNodes.get(i).getActivationDifficulty()) {
+                        i++;
+                }
+                levelNodes.add(i, sn);       
         }
 }
