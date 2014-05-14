@@ -167,7 +167,7 @@ public class Game implements KeyListener{
 			}
 		}
 		entities.addAll(entitiesToAdd);
-		if(sp != null){
+		if(sp != null && Math.random() > 0.9){
 			entities.add(sp.spawnBullet());
 		}
 	}
