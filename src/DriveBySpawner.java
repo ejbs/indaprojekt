@@ -19,7 +19,7 @@ public class DriveBySpawner implements BulletSpawner {
 				timer--;
 				return new ArrayList<EnemyEntity>();
 			}
-				timer = 10;
+				timer = 7;
                 spawnedBullets.add( new EnemyEntity(x+(width/2), y+(height/2), 10, 10, Color.GREEN, 0.00001,
                                        directionX/3,
                                        directionY/3,
