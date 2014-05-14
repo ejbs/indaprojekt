@@ -36,6 +36,8 @@ public class Game implements KeyListener{
 	public static HashMap<String,Boolean> keys;
 	//An instance of Simple spawner that is used throughout the game.
 	public SimpleSpawner sp;
+        // The current level that the game is playing through
+        private Level currentLevel;
 
 	/**
 	* The constructor to call in order to initiate the game.
@@ -257,6 +259,13 @@ public class Game implements KeyListener{
 		gameOver = false;
 		difficulty = 80;
 		readHighscore();
+
+                ArrayList<LevelNode> nodes = new ArrayList<LevelNode>();
+                ArrayList<EnemyEntity> en = new ArrayList<EnemyEntity>();
+                en.add(new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.1,0,new RingSpawner()));
+                nodes.add(new SimpleLevelNode(80, en));
+                
+                Level level = new Level(nodes);
 	}
 
 	public static void main(String[] args) {
