@@ -62,6 +62,7 @@ public class Game implements KeyListener{
 				drawScreen();
 				score++;
                                 if(loopCounter%difficulty == 0){
+                                        checkCurrentLevel()
 					spawnBullets();
 				}
 				if(score%500 == 0 && difficulty > 10){
@@ -275,7 +276,7 @@ public class Game implements KeyListener{
                 ArrayList<LevelNode> nodes = new ArrayList<LevelNode>();
                 ArrayList<EnemyEntity> en = new ArrayList<EnemyEntity>();
                 en.add(new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.1,0,new RingSpawner()));
-                nodes.add(new SimpleLevelNode(80, en));
+                nodes.add(new SimpleLevelNode(100, en));
                 
                 currentLevel = new Level(nodes);
 	}
