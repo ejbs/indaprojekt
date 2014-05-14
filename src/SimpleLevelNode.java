@@ -1,10 +1,12 @@
+import java.util.*;
+
 /**
  * This is the SimpleLevelNode.
  * Its activate() method simply retuurns the entities provided at construction-time
  * without doing anything else.
  */
-public class SimpleLevelNode {
-        private int final activationDifficulty;
+public class SimpleLevelNode implements LevelNode{
+        private final int activationDifficulty;
         private ArrayList<EnemyEntity> entities;
 
         public SimpleLevelNode(int activationDifficulty, ArrayList<EnemyEntity> entities) {
