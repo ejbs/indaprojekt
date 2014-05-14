@@ -61,11 +61,7 @@ public class Game implements KeyListener{
 			if(loopCounter%10 == 0){
 				drawScreen();
 				score++;
-				if(loopCounter%difficulty == 0){
-                                        if(currentLevel.hasNext() &&
-                                           currentLevel.getNextDifficultyActivation() >= difficulty) {
-                                                entities.addAll(currentLevel.activateNext());
-                                        }
+                                if(loopCounter%difficulty == 0){
 					spawnBullets();
 				}
 				if(score%500 == 0 && difficulty > 10){
@@ -86,6 +82,18 @@ public class Game implements KeyListener{
 		}
 	}
 
+        /**
+         * Naming is hard.
+         * This method checks if it is appropriate to spawn any new entities according to the currentLevel
+         * and does so if appropriate.
+         */
+        private void checkCurrentLevel() {
+                if(currentLevel.hasNext() &&
+                   currentLevel.getNextDifficultyActivation() >= difficulty) {
+                        entities.addAll(currentLevel.activateNext());
+                }
+        }
+        
 	/**
 	* Does all calculations regarding physics.
 	*/
