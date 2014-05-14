@@ -3,11 +3,15 @@
  * 
  */
 public class Level {
-        ArrayList<LevelNode> levelNodes;
+        private ArrayList<LevelNode> levelNodes;
 
         public Level(ArrayList<LevelNode> levelNodes) {
                 this.levelNodes = levelNodes;
                 sortNodesByActivationDifficulty(this.levelNodes);
+        }
+
+        public Level() {
+
         }
         
         public void sortNodesByActivationDifficulty(ArrayList<LevelNode> nodes) {
@@ -31,12 +35,26 @@ public class Level {
         
         
         public void addSimpleNode(int activationDifficulty, ArrayList<EnemyEntity> spawnThese) {
-                SimpleNode sn = SimpleNode(activationDifficulty, spawnThese);
+                SimpleLevelNode sn =  new SimpleLevelNode(activationDifficulty, spawnThese);
+                addNode(sn);
+        }
+        public void addNode(LevelNode l) {
                 int i = 0;
-                int diff = sn.getActivationDifficulty();
+                int diff = l.getActivationDifficulty();
                 while(i < levelNodes.size() && diff <= levelNodes.get(i).getActivationDifficulty()) {
                         i++;
                 }
-                levelNodes.add(i, sn);       
+                levelNodes.add(i, l);
+        }
+        public int getNextDifficultyActivation() {
+                return levelNodes.get(0).getActivationDifficulty();
+        }
+        public boolean hasNext() {
+                return levelNodes.size() > 0;
+        }
+        
+        public ArrayList<EnemyEntity> activateNext() {
+                LevelNode l = levelNodes.remove(0);
+                return l.activate();
         }
 }
