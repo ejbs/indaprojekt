@@ -62,7 +62,7 @@ public class Game implements KeyListener{
 				drawScreen();
 				score++;
                                 if(loopCounter%difficulty == 0){
-                                        checkCurrentLevel()
+                                        checkCurrentLevel();
 					spawnBullets();
 				}
 				if(score%500 == 0 && difficulty > 10){
