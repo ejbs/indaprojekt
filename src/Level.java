@@ -14,7 +14,7 @@ public class Level {
 
         }
         
-        public void sortNodesByActivationDifficulty(ArrayList<LevelNode> nodes) {
+        private void sortNodesByActivationDifficulty(ArrayList<LevelNode> nodes) {
                 Collections.sort(nodes, new Comparator<LevelNode>() {
                                 public int compare(LevelNode n1, LevelNode n2) {
                                         int a1 = n1.getActivationDifficulty();
