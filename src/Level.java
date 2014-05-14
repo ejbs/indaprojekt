@@ -25,7 +25,8 @@ public class Level {
                                         if(a1 == a2) {
                                                 return 0;
                                         }
-                                        if(a1 > a2) {
+                                        // A lower difficulty comes after a higher one
+                                        if(a1 < a2) {
                                                 return 1;
                                         }
                                         else {
