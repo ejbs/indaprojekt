@@ -62,6 +62,10 @@ public class Game implements KeyListener{
 				drawScreen();
 				score++;
 				if(loopCounter%difficulty == 0){
+                                        if(currentLevel.hasNext() &&
+                                           currentLevel.getNextDifficultyActivation() >= difficulty) {
+                                                entities.addAll(currentLevel.activateNext());
+                                        }
 					spawnBullets();
 				}
 				if(score%500 == 0 && difficulty > 10){
@@ -250,7 +254,7 @@ public class Game implements KeyListener{
 		//sp = new SimpleSpawner(WIDTH,HEIGHT);
 		entities = new ArrayList<ScreenEntity>();
 		entities.add( new PlayerEntity(100,300,20,20,Color.RED) );
-		entities.add( new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.1,0,new RingSpawner()) );
+		//entities.add( new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.1,0,new RingSpawner()) );
 		keys = new HashMap<String,Boolean>();
 		keys.put("up", false);
 		keys.put("down", false);
@@ -265,7 +269,7 @@ public class Game implements KeyListener{
                 en.add(new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.1,0,new RingSpawner()));
                 nodes.add(new SimpleLevelNode(80, en));
                 
-                Level level = new Level(nodes);
+                currentLevel = new Level(nodes);
 	}
 
 	public static void main(String[] args) {
