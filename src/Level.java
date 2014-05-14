@@ -48,13 +48,24 @@ public class Level {
                 }
                 levelNodes.add(i, l);
         }
+        /**
+         * Returns when the next node wants to be activated.
+         * Note that this assumes that the caller has manually checked (with hasNext())
+         * that there is in fact a next node.
+         */
         public int getNextDifficultyActivation() {
                 return levelNodes.get(0).getActivationDifficulty();
         }
+        /**
+         * Is there another node?
+         */
         public boolean hasNext() {
                 return levelNodes.size() > 0;
         }
-        
+
+        /**
+         * Activate the next node!
+         */
         public ArrayList<EnemyEntity> activateNext() {
                 LevelNode l = levelNodes.remove(0);
                 return l.activate();
