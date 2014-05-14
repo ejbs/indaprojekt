@@ -276,12 +276,12 @@ public class Game implements KeyListener{
                 ArrayList<EnemyEntity> en1 = new ArrayList<EnemyEntity>();
                 ArrayList<EnemyEntity> en2 = new ArrayList<EnemyEntity>();
                 ArrayList<EnemyEntity> en3 = new ArrayList<EnemyEntity>();
-                en1.add(new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.1,0,new RingSpawner()));
-                en2.add(new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.1,0,new RingSpawner()));
-                en3.add(new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.1,0,new RingSpawner()));
-                nodes.add(new SimpleLevelNode(60, en1));
-                nodes.add(new SimpleLevelNode(80, en2));
-                nodes.add(new SimpleLevelNode(70, en3));
+                en1.add(new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.2,0,new RingSpawner()));
+                en2.add(new EnemyEntity(WIDTH/2, 0,100,100,Color.PINK,0.001,0,0.2,new RingSpawner()));
+                en3.add(new EnemyEntity(WIDTH/2,HEIGHT,100,100,Color.PINK,0.001,0,-0.2,new RingSpawner()));
+                nodes.add(new SimpleLevelNode(80, en1));
+                nodes.add(new SimpleLevelNode(70, en2));
+                nodes.add(new SimpleLevelNode(60, en3));
                 
                 currentLevel = new Level(nodes);
 	}
