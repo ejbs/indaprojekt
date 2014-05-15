@@ -5,33 +5,90 @@ import java.util.ArrayList;
 * This interface defines basic properties for the visible entities on the screen.
 */
 public interface ScreenEntity {
-	double getX();
-	void setX(double d);
-	double getY();
-	void setY(double d);
-	double getVelocityX();
-	void setVelocityX(double d);
-	double getVelocityY();
-	void setVelocityY(double d);
-	int getWidth();
-	int getHeight();
-	void addSpawner(BulletSpawner bs);
-	ArrayList<EnemyEntity> spawnBullet();
-	Color getColor();
-	int getType();
 
-	/**
-	* Is the object collideable/solid?
-	**/
-	boolean isIntersectable();
+    /**
+    * Returns the ScreenEntity's current position on the x-axis.
+    */
+    double getX();
 
-	/**
-	* Called at each draw, lets the object draw to the canvas g.
-	**/
-	void draw(Graphics g);
+    /**
+    * Called to set the ScreenEntity's position on the x-axis.
+    */
+    void setX(double d);
 
-	/**
-	* Called for each game tick, used for book keeping and other things
-	**/
-	void tick();
+    /**
+    * Returns the ScreenEntity's current position on the y-axis.
+    */
+    double getY();
+
+    /**
+    * Called to set the ScreenEntity's position on the y-axis.
+    */
+    void setY(double d);
+
+    /**
+    * Returns the ScreenEntity's current velocity in the x-axis direction.
+    */
+    double getVelocityX();
+
+    /**
+    * Called to set the ScreenEntity's velocity oi the x-axis direction.
+    */
+    void setVelocityX(double d);
+
+    /**
+    * Returns the ScreenEntity's current velocity in the y-axis direction.
+    */
+    double getVelocityY();
+
+    /**
+    * Called to set the ScreenEntity's velocity oi the y-axis direction.
+    */
+    void setVelocityY(double d);
+
+    /**
+    * Returns the width of this ScreenEntity.
+    */
+    int getWidth();
+
+    /**
+    * Returns the height of this ScreenEntity.
+    */
+    int getHeight();
+
+    /**
+    * Called to add a BulletSpawner to this ScreenEntity.
+    */
+    void addSpawner(BulletSpawner bs);
+
+    /**
+    * Called to make this ScreenEntity spawn bullets according to its BulletSpawner.
+    * This method may return null.
+    */
+    ArrayList<EnemyEntity> spawnBullet();
+
+    /**
+    * Returns the color of this ScreenEntity.
+    */
+    Color getColor();
+
+    /**
+    * Returns the type of this ScreenEntity.
+    */
+    int getType();
+
+    /**
+    * Is the object collideable/solid?
+    */
+    boolean isIntersectable();
+
+    /**
+    * Called at each draw, lets the object draw to the canvas g.
+    */
+    void draw(Graphics g);
+
+    /**
+    * Called for each game tick, used for book keeping and other things
+    */
+    void tick();
 }
