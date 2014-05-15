@@ -73,12 +73,18 @@ public interface ScreenEntity {
     Color getColor();
 
     /**
+    * Returns a double representing the acceleration power of this ScreenEtity.
+    */
+    double getEnginePower();
+
+    /**
     * Returns the type of this ScreenEntity.
     */
     int getType();
 
     /**
-    * Is the object collideable/solid?
+    * Returns true if the object can collide with the player.
+    * Otherwise it returns false.
     */
     boolean isIntersectable();
 
@@ -88,7 +94,7 @@ public interface ScreenEntity {
     void draw(Graphics g);
 
     /**
-    * Called for each game tick, used for book keeping and other things
+    * Called for each game tick, moves the ScreenEntity according to its velocity.
     */
     void tick();
 }

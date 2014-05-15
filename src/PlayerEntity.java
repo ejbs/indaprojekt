@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * It is the entity that the player controls on the screen.
  */
 public class PlayerEntity implements ScreenEntity {
-
+	//The type of a PlayerEntity is always 0.
 	private final int TYPE = 0;
 	private Color color;
 	private boolean intersectable;
