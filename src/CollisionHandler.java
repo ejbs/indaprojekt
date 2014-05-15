@@ -19,10 +19,10 @@ public class CollisionHandler {
 	* Returns true if the specified object is still on the screen.
 	*/
 	public boolean insideBounds(ScreenEntity a, int width, int height){
-		if( a.getX() > width+10 || a.getX()-a.getWidth() < -10 ) {
+		if( a.getX() > width+10 || a.getX()+a.getWidth() < -10 ) {
 			return false;
 		}
-		if( a.getY() > height+10 || a.getY()-a.getHeight() < -10 ){
+		if( a.getY() > height+10 || a.getY()+a.getHeight() < -10 ){
 			return false;
 		}
 		return true;
