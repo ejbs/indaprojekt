@@ -294,13 +294,12 @@ public class Game implements KeyListener{
 		ArrayList<EnemyEntity> en1 = new ArrayList<EnemyEntity>();
 		ArrayList<EnemyEntity> en2 = new ArrayList<EnemyEntity>();
 
-
 		en0.add(new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.2,0,new RingSpawner()));
 		en1.add(new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.2,0,new RingSpawner()));
 		en1.add(new EnemyEntity(WIDTH/2, 0,100,100,Color.PINK,0.001,0,0.2,new RingSpawner()));
 		en1.add(new EnemyEntity(WIDTH/2,HEIGHT,100,100,Color.PINK,0.001,0,-0.2,new RingSpawner()));
 		for(int i = 0; i < 2; i++) {
-			en2.add(new EnemyEntity(r.nextInt(WIDTH-300),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new ExperimentalSpawner()));
+			en2.add(new EnemyEntity(0,0,25,25,Color.MAGENTA, 0.001, 0.1, 0.1, new ExperimentalSpawner()));
 		}
 		en2.add(new EnemyEntity(r.nextInt(WIDTH-300),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new FunkySpawner()));
 
