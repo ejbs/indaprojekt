@@ -2,20 +2,24 @@ import java.util.*;
 
 /**
  * Introduces the concept of a level to the game.
- * 
+ * A Level is a container for LevelNodes,
+ * with some book-keeping attached for spawning the entities in the right order.
  */
 public class Level {
         private ArrayList<LevelNode> levelNodes;
 
+        /**
+         * Take an ArrayList of LevelNode:s and add them to the level.
+         */
         public Level(ArrayList<LevelNode> levelNodes) {
                 this.levelNodes = levelNodes;
                 sortNodesByActivationDifficulty(this.levelNodes);
         }
 
-        public Level() {
-
-        }
-        
+        /**
+         * Sorts all nodes by activationDifficulty.
+         * Note that this is destructive.
+         */
         private void sortNodesByActivationDifficulty(ArrayList<LevelNode> nodes) {
                 Collections.sort(nodes, new Comparator<LevelNode>() {
                                 public int compare(LevelNode n1, LevelNode n2) {
@@ -36,11 +40,23 @@ public class Level {
                         });
         }
         
-        
+
+        /**
+         * Same as addNode() however it makes a SimpleLevelNode for you.
+         * Often you only ever really need a SimpleLevelNode, this makes it
+         * easier for the user to take care of that need.
+         */
         public void addSimpleNode(int activationDifficulty, ArrayList<EnemyEntity> spawnThese) {
                 SimpleLevelNode sn =  new SimpleLevelNode(activationDifficulty, spawnThese);
                 addNode(sn);
         }
+        
+        /**
+         * Add a LevelNode to the Level.
+         * You should primarily not use this but instead use the constructor
+         * which takes an ArrayList<LevelNode>.
+         * This is mainly for altering a Level mid-play.
+         */
         public void addNode(LevelNode l) {
                 int i = 0;
                 int diff = l.getActivationDifficulty();
@@ -59,6 +75,7 @@ public class Level {
         }
         /**
          * Is there another node?
+         * If so, return true
          */
         public boolean hasNext() {
                 return levelNodes.size() > 0;
