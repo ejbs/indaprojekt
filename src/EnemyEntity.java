@@ -28,6 +28,9 @@ public class EnemyEntity implements ScreenEntity {
     // May be null, in which case no bullets will be spawned (see EnemyEntity.spawnBullet())
     public ArrayList<BulletSpawner> bs;
 
+	/**
+	* Returns an EnemyEntity with the specified properties.
+	*/
     public EnemyEntity(double x, double y, int width, int height, Color c, double enginePower, double xVel, double yVel, BulletSpawner bs) {
         this.xPos = x;
         this.yPos = y;
