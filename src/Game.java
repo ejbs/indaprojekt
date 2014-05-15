@@ -294,6 +294,7 @@ public class Game implements KeyListener{
 		ArrayList<EnemyEntity> en1 = new ArrayList<EnemyEntity>();
 		ArrayList<EnemyEntity> en2 = new ArrayList<EnemyEntity>();
                 ArrayList<EnemyEntity> en3 = new ArrayList<EnemyEntity>();
+                ArrayList<EnemyEntity> en4 = new ArrayList<EnemyEntity>();
 
 		en0.add(new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.2,0,new RingSpawner()));
 		en1.add(new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.2,0,new RingSpawner()));
@@ -316,11 +317,20 @@ public class Game implements KeyListener{
                 en3.add(new EnemyEntity(r.nextInt(WIDTH-100),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new ExperimentalSpawner()));
                 en3.add(new EnemyEntity(r.nextInt(WIDTH-100),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new FunkySpawner()));
                 en3.add(new EnemyEntity(r.nextInt(WIDTH-100),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new FunkySpawner()));
+                en3.add(new EnemyEntity(r.nextInt(WIDTH-100),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new RingSpawner()));
+                en3.add(new EnemyEntity(r.nextInt(WIDTH-100),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new RingSpawner()));
+
+                for(int i = 0; i < 30; i++) {
+                        en4.add(new EnemyEntity(r.nextInt(WIDTH-100),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new RingSpawner()));
+                        en4.add(new EnemyEntity(r.nextInt(WIDTH-100),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new ExperimentalSpawner()));
+                        en4.add(new EnemyEntity(r.nextInt(WIDTH-100),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new FunkySpawner()));
+                }
 
 		nodes.add(new SimpleLevelNode(70, en0));
                 nodes.add(new SimpleLevelNode(60, en1));
 		nodes.add(new SimpleLevelNode(50, en2));
                 nodes.add(new SimpleLevelNode(30, en3));
+                nodes.add(new SimpleLevelNode(10, en4));
 
 		currentLevel = new Level(nodes);
 	}
