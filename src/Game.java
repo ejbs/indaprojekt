@@ -36,8 +36,8 @@ public class Game implements KeyListener{
 	public static HashMap<String,Boolean> keys;
 	//An instance of Simple spawner that is used throughout the game.
 	public SimpleSpawner sp;
-        // The current level that the game is playing through
-        private Level currentLevel;
+	// The current level that the game is playing through
+	private Level currentLevel;
 
 	/**
 	* The constructor to call in order to initiate the game.
@@ -51,8 +51,6 @@ public class Game implements KeyListener{
 	/**
 	* The never ending loop sustaining the game's calculations and screen updates.
 	*/
-	//TODO: remove bullets when they exit the screen
-	//      maybe put the screen drawing in a new thread?
 	private void gameLoop() {
 		//a counter that helps with the fps determination and bullet spawning.
 		int loopCounter = 0;
@@ -61,8 +59,8 @@ public class Game implements KeyListener{
 			if(loopCounter%10 == 0){
 				drawScreen();
 				score++;
-                                if(loopCounter%difficulty == 0){
-                                        checkCurrentLevel();
+				if(loopCounter%difficulty == 0){
+					checkCurrentLevel();
 					spawnBullets();
 				}
 				if(score%500 == 0 && difficulty > 10){
@@ -83,18 +81,18 @@ public class Game implements KeyListener{
 		}
 	}
 
-        /**
-         * Naming is hard.
-         * This method checks if it is appropriate to spawn any new entities according to the currentLevel
-         * and does so if appropriate.
-         */
-        private void checkCurrentLevel() {
-                if(currentLevel.hasNext() &&
-                   currentLevel.getNextDifficultyActivation() >= difficulty) {
-                        entities.addAll(currentLevel.activateNext());
-                }
-        }
-        
+	/**
+	* Naming is hard.
+	* This method checks if it is appropriate to spawn any new entities according to the currentLevel
+	* and does so if appropriate.
+	*/
+	private void checkCurrentLevel() {
+		if(currentLevel.hasNext() &&
+		currentLevel.getNextDifficultyActivation() >= difficulty) {
+			entities.addAll(currentLevel.activateNext());
+		}
+	}
+
 	/**
 	* Does all calculations regarding physics.
 	*/
@@ -206,7 +204,10 @@ public class Game implements KeyListener{
 		}
 
 	}
-
+	/**
+	* Called when the player dies. This method does all
+	* the computations needed when the player dies.
+	*/
 	private void gameOver(){
 		bufferG.setFont(new Font("Monospaced", Font.BOLD, 110));
 		bufferG.setColor(Color.YELLOW);
@@ -216,8 +217,19 @@ public class Game implements KeyListener{
 			highscore = score;
 			saveHighscore();
 		}
+		try{
+			Thread.sleep(1500);
+		}
+		catch(Exception e){
+			System.out.println("Failed to sleep thread");
+		}
+		score = 0;
+		frame.dispose();
 	}
 
+	/**
+	* Saves the current highscore to the current highscore path.
+	*/
 	private void saveHighscore() {
 		// The following overwrites the file if present, so we don't have to bother about any pre-existing files.
 		PrintWriter pw = null;
@@ -231,6 +243,9 @@ public class Game implements KeyListener{
 		}
 	}
 
+	/**
+	* Reads the highscore from the current highscore path and saves it in an integer.
+	*/
 	private void readHighscore() {
 		BufferedReader f = null;
 		try {
@@ -272,33 +287,33 @@ public class Game implements KeyListener{
 		difficulty = 80;
 		readHighscore();
 
-                Random r = new Random();
+		Random r = new Random();
 
-                ArrayList<LevelNode> nodes = new ArrayList<LevelNode>();
-                ArrayList<EnemyEntity> en0 = new ArrayList<EnemyEntity>();
-                ArrayList<EnemyEntity> en1 = new ArrayList<EnemyEntity>();
-                ArrayList<EnemyEntity> en2 = new ArrayList<EnemyEntity>();
+		ArrayList<LevelNode> nodes = new ArrayList<LevelNode>();
+		ArrayList<EnemyEntity> en0 = new ArrayList<EnemyEntity>();
+		ArrayList<EnemyEntity> en1 = new ArrayList<EnemyEntity>();
+		ArrayList<EnemyEntity> en2 = new ArrayList<EnemyEntity>();
 
-                
-                en0.add(new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.2,0,new RingSpawner()));
-                en1.add(new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.2,0,new RingSpawner()));
-                en1.add(new EnemyEntity(WIDTH/2, 0,100,100,Color.PINK,0.001,0,0.2,new RingSpawner()));
-                en1.add(new EnemyEntity(WIDTH/2,HEIGHT,100,100,Color.PINK,0.001,0,-0.2,new RingSpawner()));
-                for(int i = 0; i < 2; i++) {
-                        en2.add(new EnemyEntity(r.nextInt(WIDTH-300),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new ExperimentalSpawner()));
-                }
-                en2.add(new EnemyEntity(r.nextInt(WIDTH-300),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new FunkySpawner()));
-                
-                nodes.add(new SimpleLevelNode(70, en0));
-                nodes.add(new SimpleLevelNode(60, en1));
-                nodes.add(new SimpleLevelNode(50, en2));
-                
-                currentLevel = new Level(nodes);
+
+		en0.add(new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.2,0,new RingSpawner()));
+		en1.add(new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.2,0,new RingSpawner()));
+		en1.add(new EnemyEntity(WIDTH/2, 0,100,100,Color.PINK,0.001,0,0.2,new RingSpawner()));
+		en1.add(new EnemyEntity(WIDTH/2,HEIGHT,100,100,Color.PINK,0.001,0,-0.2,new RingSpawner()));
+		for(int i = 0; i < 2; i++) {
+			en2.add(new EnemyEntity(r.nextInt(WIDTH-300),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new ExperimentalSpawner()));
+		}
+		en2.add(new EnemyEntity(r.nextInt(WIDTH-300),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new FunkySpawner()));
+
+		nodes.add(new SimpleLevelNode(70, en0));
+		nodes.add(new SimpleLevelNode(60, en1));
+		nodes.add(new SimpleLevelNode(50, en2));
+
+		currentLevel = new Level(nodes);
 	}
 
 	public static void main(String[] args) {
-		new Game();
-		//TODO: Some cleaing and then restarting the game
-		//new Game();
+		while(true){
+			new Game();
+		}
 	}
 }
