@@ -1,6 +1,9 @@
 import java.awt.Color;
 import java.util.ArrayList;
 
+/**
+* The BossSpawner spawns bullets in a circle pattern.
+*/
 public class BossSpawner implements BulletSpawner {
 	private double step, currentStep;
 
