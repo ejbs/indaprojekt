@@ -293,6 +293,7 @@ public class Game implements KeyListener{
 		ArrayList<EnemyEntity> en0 = new ArrayList<EnemyEntity>();
 		ArrayList<EnemyEntity> en1 = new ArrayList<EnemyEntity>();
 		ArrayList<EnemyEntity> en2 = new ArrayList<EnemyEntity>();
+                ArrayList<EnemyEntity> en3 = new ArrayList<EnemyEntity>();
 
 		en0.add(new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.2,0,new RingSpawner()));
 		en1.add(new EnemyEntity(1500,400,100,100,Color.PINK,0.001,-0.2,0,new RingSpawner()));
@@ -302,10 +303,24 @@ public class Game implements KeyListener{
 			en2.add(new EnemyEntity(0,0,25,25,Color.MAGENTA, 0.001, 0.1, 0.1, new ExperimentalSpawner()));
 		}
 		en2.add(new EnemyEntity(r.nextInt(WIDTH-300),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new FunkySpawner()));
+                // Time to die
+                en3.add(new EnemyEntity(r.nextInt(WIDTH-100),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new DriveBySpawner()));
+                en3.add(new EnemyEntity(r.nextInt(WIDTH-100),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new DriveBySpawner()));
+                en3.add(new EnemyEntity(r.nextInt(WIDTH-100),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new DriveBySpawner()));
+                en3.add(new EnemyEntity(r.nextInt(WIDTH-100),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new DriveBySpawner()));
+                en3.add(new EnemyEntity(r.nextInt(WIDTH-100),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new DriveBySpawner()));
+                en3.add(new EnemyEntity(r.nextInt(WIDTH-100),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new DriveBySpawner()));
+                en3.add(new EnemyEntity(r.nextInt(WIDTH-100),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new DriveBySpawner()));
+                en3.add(new EnemyEntity(r.nextInt(WIDTH-100),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new DriveBySpawner()));
+                en3.add(new EnemyEntity(r.nextInt(WIDTH-100),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new ExperimentalSpawner()));
+                en3.add(new EnemyEntity(r.nextInt(WIDTH-100),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new ExperimentalSpawner()));
+                en3.add(new EnemyEntity(r.nextInt(WIDTH-100),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new FunkySpawner()));
+                en3.add(new EnemyEntity(r.nextInt(WIDTH-100),0,25,25,Color.MAGENTA, 0.001, 0.2, 0.3, new FunkySpawner()));
 
 		nodes.add(new SimpleLevelNode(70, en0));
-		nodes.add(new SimpleLevelNode(60, en1));
+                nodes.add(new SimpleLevelNode(60, en1));
 		nodes.add(new SimpleLevelNode(50, en2));
+                nodes.add(new SimpleLevelNode(30, en3));
 
 		currentLevel = new Level(nodes);
 	}
