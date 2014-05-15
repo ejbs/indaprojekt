@@ -7,9 +7,14 @@ import java.util.*;
  * Activation at the appropriate activationDifficulty is not enforced however it is expected.
  */
 public interface LevelNode {
-        
-        public int getActivationDifficulty();
 
+        /**
+         * Returns the activationDifficulty of this LevelNode.
+         * The activationDifficulty is an integer which says at
+         * which difficulty a LevelNode should be activated.
+         */
+        public int getActivationDifficulty();
+        
         /** 
          * activate() gives back a list of the enemies to be spawned.
          */
